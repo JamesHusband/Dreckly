@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@dreckly/data-access": ["libs/data-access/src/index.ts"],
+      "@dreckly/layout": ["libs/features/layout/src/index.ts"],
       "@dreckly/types": ["libs/shared/types/src/index.ts"],
       "@dreckly/ui-kit": ["libs/shared/ui-kit/src/index.ts"]
     }
