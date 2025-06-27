@@ -7,3 +7,5 @@ export async function getUser(): Promise<User> {
     email: 'john@example.com',
   };
 }
+
+export * from './cuisines';

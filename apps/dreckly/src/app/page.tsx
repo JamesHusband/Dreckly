@@ -1,5 +1,5 @@
 import { getUser } from '@dreckly/data-access';
-import { Hero } from '@dreckly/home';
+import { CuisineFilter, Hero } from '@dreckly/home';
 
 export default async function Index() {
   const user = await getUser();
@@ -7,6 +7,7 @@ export default async function Index() {
   return (
     <div>
       <Hero />
+      <CuisineFilter />
       <p>{user.name}</p>
     </div>
   );

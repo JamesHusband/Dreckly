@@ -1,6 +1,5 @@
 'use client';
 
-import { getCuisines } from '@dreckly/data-access';
 import { Cuisine } from '@dreckly/types';
 import { CuisineCard } from '@dreckly/ui-kit';
 import React, { useEffect, useState, createContext, useContext } from 'react';
@@ -55,20 +54,59 @@ export const CuisineProvider: React.FC<{ children: React.ReactNode }> = ({
 
 export const CuisineFilter = () => {
   const [cuisineTypes, setCuisineTypes] = useState<Cuisine[]>([]);
-  const { selectedCuisine, setSelectedCuisine } = useCuisineFilter();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  // const { selectedCuisine, setSelectedCuisine } = useCuisineFilter();
 
   useEffect(() => {
     const loadCuisines = async () => {
-      const cuisines = await getCuisines();
-      setCuisineTypes(cuisines);
+      try {
+        setLoading(true);
+        const response = await fetch('/api/cuisines');
+        if (!response.ok) {
+          throw new Error('Failed to fetch cuisines');
+        }
+        const cuisines = await response.json();
+        setCuisineTypes(cuisines);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred');
+      } finally {
+        setLoading(false);
+      }
     };
     loadCuisines();
   }, []);
 
-  const handleCuisineClick = (cuisineName: string) => {
-    const newSelection = selectedCuisine === cuisineName ? null : cuisineName;
-    setSelectedCuisine(newSelection);
-  };
+  // const handleCuisineClick = (cuisineName: string) => {
+  //   const newSelection = selectedCuisine === cuisineName ? null : cuisineName;
+  //   setSelectedCuisine(newSelection);
+  // };
+
+  if (loading) {
+    return (
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold text-center mb-8">
+            What are you craving?
+          </h2>
+          <div className="text-center">Loading cuisines...</div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-12 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-2xl font-bold text-center mb-8">
+            What are you craving?
+          </h2>
+          <div className="text-center text-red-600">Error: {error}</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-12 bg-gray-50">
@@ -84,8 +122,8 @@ export const CuisineFilter = () => {
                 key={cuisine.name}
                 {...cuisine}
                 iconComponent={Icon}
-                onClick={() => handleCuisineClick(cuisine.name)}
-                isSelected={selectedCuisine === cuisine.name}
+                // onClick={() => handleCuisineClick(cuisine.name)}
+                // isSelected={selectedCuisine === cuisine.name}
               />
             );
           })}
