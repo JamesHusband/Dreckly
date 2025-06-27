@@ -1,19 +1,17 @@
 'use client';
 
-// import { getRestaurants } from '@dreckly/data-access';
-// import { Restaurant } from '@dreckly/types';
 import { RestaurantCard } from '../RestaurantCard';
 import { useEffect, useState, useRef } from 'react';
 import { X } from 'lucide-react';
 import { Restaurant } from '@dreckly/types';
-// import { useCuisineFilter } from '@dreckly/feature-home';
+import { useCuisineFilter } from '@dreckly/home';
 
 export const RestaurantList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const hasLoaded = useRef(false);
-  // const { selectedCuisine, setSelectedCuisine } = useCuisineFilter();
+  const { selectedCuisine, setSelectedCuisine } = useCuisineFilter();
 
   useEffect(() => {
     if (hasLoaded.current) return;
@@ -39,13 +37,13 @@ export const RestaurantList: React.FC = () => {
     loadRestaurants();
   }, []);
 
-  // const filteredRestaurants = selectedCuisine
-  //   ? restaurants.filter((restaurant) => restaurant.cuisine === selectedCuisine)
-  //   : restaurants;
+  const filteredRestaurants = selectedCuisine
+    ? restaurants.filter((restaurant) => restaurant.cuisine === selectedCuisine)
+    : restaurants;
 
-  // const handleClearFilter = () => {
-  //   setSelectedCuisine(null);
-  // };
+  const handleClearFilter = () => {
+    setSelectedCuisine(null);
+  };
 
   if (loading) {
     return <div className="text-center py-8">Loading restaurants...</div>;
@@ -57,7 +55,7 @@ export const RestaurantList: React.FC = () => {
 
   return (
     <>
-      {/* {selectedCuisine && (
+      {selectedCuisine && (
         <div className="flex justify-center mb-4">
           <button
             onClick={handleClearFilter}
@@ -67,16 +65,16 @@ export const RestaurantList: React.FC = () => {
             Clear filter
           </button>
         </div>
-      )} */}
+      )}
       <div className="mb-8">
-        {/* <h2 className="text-3xl font-bold">
+        <h2 className="text-3xl font-bold">
           {selectedCuisine
             ? `${selectedCuisine} restaurants`
             : 'All restaurants'}
-        </h2> */}
+        </h2>
       </div>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {restaurants.map((restaurant) => (
+        {filteredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.id} {...restaurant} />
         ))}
       </div>
