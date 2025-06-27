@@ -1,20 +1,12 @@
 import { UiKit } from '@dreckly/ui-kit';
-import { User } from '@dreckly/types';
+import { getUser } from '@dreckly/data-access';
 
 export default async function Index() {
-  const response = await fetch('http://localhost:3000/api/hello');
-
-  const dummyUser: User = {
-    id: '1',
-    name: 'John Doe',
-    email: 'john@example.com',
-  };
-
-  console.log(response);
+  const user = await getUser();
 
   return (
     <div>
-      <p>{dummyUser.name}</p>
+      <p>{user.name}</p>
       <UiKit />
     </div>
   );
