@@ -4,9 +4,10 @@
   "license": "MIT",
   "scripts": {},
   "private": true,
-  "dependencies": {},
   "devDependencies": {
-    "@nx/js": "21.2.1",
+    "@nx/js": "^21.2.1",
+    "@nx/next": "^21.2.1",
+    "@nx/react": "^21.2.1",
     "@nx/workspace": "21.2.1",
     "nx": "21.2.1"
   }
