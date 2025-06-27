@@ -2,7 +2,7 @@
 
 import { Cuisine } from '@dreckly/types';
 import { CuisineCard } from '@dreckly/ui-kit';
-import React, { useEffect, useState, createContext, useContext } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   PieChart,
   Fish,
@@ -13,6 +13,7 @@ import {
   Cake,
   Salad,
 } from 'lucide-react';
+import { CuisineContext } from '../../providers';
 
 const cuisineIcons: Record<Cuisine['icon'], React.ElementType> = {
   PieChart,
@@ -25,13 +26,6 @@ const cuisineIcons: Record<Cuisine['icon'], React.ElementType> = {
   Salad,
 };
 
-interface CuisineContextType {
-  selectedCuisine: string | null;
-  setSelectedCuisine: (cuisine: string | null) => void;
-}
-
-const CuisineContext = createContext<CuisineContextType | undefined>(undefined);
-
 export const useCuisineFilter = () => {
   const context = useContext(CuisineContext);
   if (!context) {
@@ -40,23 +34,11 @@ export const useCuisineFilter = () => {
   return context;
 };
 
-export const CuisineProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [selectedCuisine, setSelectedCuisine] = useState<string | null>(null);
-
-  return (
-    <CuisineContext.Provider value={{ selectedCuisine, setSelectedCuisine }}>
-      {children}
-    </CuisineContext.Provider>
-  );
-};
-
 export const CuisineFilter = () => {
   const [cuisineTypes, setCuisineTypes] = useState<Cuisine[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  // const { selectedCuisine, setSelectedCuisine } = useCuisineFilter();
+  const { selectedCuisine, setSelectedCuisine } = useCuisineFilter();
 
   useEffect(() => {
     const loadCuisines = async () => {
@@ -77,10 +59,10 @@ export const CuisineFilter = () => {
     loadCuisines();
   }, []);
 
-  // const handleCuisineClick = (cuisineName: string) => {
-  //   const newSelection = selectedCuisine === cuisineName ? null : cuisineName;
-  //   setSelectedCuisine(newSelection);
-  // };
+  const handleCuisineClick = (cuisineName: string) => {
+    const newSelection = selectedCuisine === cuisineName ? null : cuisineName;
+    setSelectedCuisine(newSelection);
+  };
 
   if (loading) {
     return (
@@ -122,8 +104,8 @@ export const CuisineFilter = () => {
                 key={cuisine.name}
                 {...cuisine}
                 iconComponent={Icon}
-                // onClick={() => handleCuisineClick(cuisine.name)}
-                // isSelected={selectedCuisine === cuisine.name}
+                onClick={() => handleCuisineClick(cuisine.name)}
+                isSelected={selectedCuisine === cuisine.name}
               />
             );
           })}
