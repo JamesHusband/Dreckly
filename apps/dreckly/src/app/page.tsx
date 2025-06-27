@@ -1,4 +1,3 @@
-import { UiKit } from '@dreckly/ui-kit';
 import { getUser } from '@dreckly/data-access';
 
 export default async function Index() {
@@ -7,7 +6,6 @@ export default async function Index() {
   return (
     <div>
       <p>{user.name}</p>
-      <UiKit />
     </div>
   );
 }
