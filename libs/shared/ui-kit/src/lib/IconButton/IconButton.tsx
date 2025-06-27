@@ -4,8 +4,9 @@ interface IconButtonProps {
   icon: ReactNode;
   variant?: 'primary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
-  onClick: () => void;
+  onClick?: () => void;
   'aria-label': string;
+  disabled?: boolean;
 }
 
 export function IconButton({
@@ -14,6 +15,7 @@ export function IconButton({
   size = 'md',
   onClick,
   'aria-label': ariaLabel,
+  disabled = false,
 }: IconButtonProps) {
   const baseClasses =
     'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
@@ -31,12 +33,17 @@ export function IconButton({
     lg: 'h-10 w-10 text-base',
   };
 
+  const disabledClasses = disabled ? 'opacity-50 cursor-not-allowed' : '';
+
+  const handleClick = disabled ? undefined : onClick;
+
   return (
     <button
       type="button"
-      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]}`}
-      onClick={onClick}
+      className={`${baseClasses} ${variantClasses[variant]} ${sizeClasses[size]} ${disabledClasses}`}
+      onClick={handleClick}
       aria-label={ariaLabel}
+      disabled={disabled}
     >
       {icon}
     </button>

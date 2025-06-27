@@ -7,3 +7,4 @@ export * from './lib/CuisineCard';
 export * from './lib/BackButton';
 export * from './lib/ConfirmationModal';
 export * from './lib/IconButton';
+export * from './lib/ItemCounter';
