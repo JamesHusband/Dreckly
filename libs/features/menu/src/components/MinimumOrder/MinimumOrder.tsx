@@ -1,0 +1,11 @@
+import { formatPrice } from '@dreckly/utils';
+
+export function MinimumOrder({ minOrder }: { minOrder: number }) {
+  return (
+    <div className="mb-6">
+      <span className="inline-block bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium">
+        Minimum order: {formatPrice(minOrder)}
+      </span>
+    </div>
+  );
+}

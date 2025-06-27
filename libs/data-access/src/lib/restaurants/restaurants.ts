@@ -1,5 +1,15 @@
 import { Restaurant } from '@dreckly/types';
 
+export async function getRestaurant(id: string): Promise<Restaurant> {
+  const res = await fetch(`http://localhost:3000/api/restaurants/${id}`);
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch data');
+  }
+
+  return res.json() as Promise<Restaurant>;
+}
+
 export async function getRestaurants(): Promise<Restaurant[]> {
   // Mock data - in a real app this would come from a database
   return [

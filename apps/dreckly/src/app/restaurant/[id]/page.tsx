@@ -1,5 +1,5 @@
-import { Menu } from '@dreckly/menu';
 import { getRestaurant } from '@dreckly/data-access';
+import { Menu } from '@dreckly/menu';
 
 export default async function RestaurantPage({
   params,
