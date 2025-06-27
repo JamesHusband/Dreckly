@@ -23,7 +23,8 @@
       "@dreckly/restaurants": ["libs/features/restaurants/src/index.ts"],
       "@dreckly/state": ["libs/state/src/index.ts"],
       "@dreckly/types": ["libs/shared/types/src/index.ts"],
-      "@dreckly/ui-kit": ["libs/shared/ui-kit/src/index.ts"]
+      "@dreckly/ui-kit": ["libs/shared/ui-kit/src/index.ts"],
+      "@dreckly/utils": ["libs/shared/utils/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

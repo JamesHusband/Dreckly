@@ -3,7 +3,6 @@ import { formatPrice } from '@dreckly/utils';
 import { calculateCart } from '@dreckly/cart';
 import { MenuCartItem } from '../MenuCartItem';
 import { Restaurant, Cart } from '@dreckly/types';
-import { Button } from '@dreckly/ui-kit';
 
 interface MenuCartSidebarProps {
   restaurant: Restaurant;
@@ -33,7 +32,7 @@ export function MenuCartSidebar({
           ) : (
             <>
               <div className="space-y-3 mb-4">
-                {restaurant.menu.map((category) =>
+                {(restaurant.menu ?? []).map((category) =>
                   category.items.map((item) => (
                     <MenuCartItem
                       key={item.id}
@@ -65,17 +64,19 @@ export function MenuCartSidebar({
               </div>
 
               <Link href="/cart">
-                <Button
-                  variant={
-                    subtotal < restaurant.minimumOrder ? 'secondary' : 'primary'
-                  }
-                  size="lg"
-                  className="w-full mt-4"
+                <button
+                  type="button"
+                  className={`w-full mt-4 py-3 px-4 rounded-md font-medium transition-colors ${
+                    subtotal < (restaurant.minimumOrder ?? 0)
+                      ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                      : 'bg-orange-500 hover:bg-orange-600 text-white'
+                  }`}
+                  disabled={subtotal < (restaurant.minimumOrder ?? 0)}
                 >
-                  {subtotal < restaurant.minimumOrder
+                  {subtotal < (restaurant.minimumOrder ?? 0)
                     ? `Minimum order ${formatPrice(restaurant.minimumOrder)}`
                     : 'Proceed to Checkout'}
-                </Button>
+                </button>
               </Link>
             </>
           )}

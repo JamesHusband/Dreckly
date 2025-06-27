@@ -14,8 +14,14 @@ interface RestaurantMenuProps {
 }
 
 export function Menu({ restaurant }: RestaurantMenuProps) {
-  const { addToCart, removeFromCart, isOpen, hideConfirmation, confirmAction } =
-    useCartActions();
+  const {
+    addToCart,
+    removeFromCart,
+    isOpen,
+    hideConfirmation,
+    confirmAction,
+    handleConfirmAddToCart,
+  } = useCartActions();
   const { cart } = useCart();
 
   const handleAddToCart = (itemId: string) => {
@@ -29,7 +35,7 @@ export function Menu({ restaurant }: RestaurantMenuProps) {
   const handleConfirm = () => {
     const pendingAction = confirmAction();
     if (pendingAction) {
-      handleAddToCart(pendingAction.itemId);
+      handleConfirmAddToCart(pendingAction.itemId, pendingAction.restaurant);
       hideConfirmation();
     }
   };
@@ -52,14 +58,14 @@ export function Menu({ restaurant }: RestaurantMenuProps) {
             <div className="lg:col-span-2">
               <MinimumOrder minOrder={restaurant.minimumOrder} />
 
-              {restaurant.menu?.map((category, menuIndex) => (
+              {(restaurant.menu ?? []).map((category, menuIndex) => (
                 <MenuCategory
                   key={category.name}
                   category={category}
                   cart={cart.cart}
                   onAddToCart={handleAddToCart}
                   onRemoveFromCart={handleRemoveFromCart}
-                  isLast={menuIndex === restaurant.menu.length - 1}
+                  isLast={menuIndex === (restaurant.menu?.length ?? 0) - 1}
                 />
               ))}
             </div>

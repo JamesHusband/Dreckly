@@ -6,7 +6,7 @@ export const startNewOrder = (set: any) => {
       ...state,
       cart: {},
       currentRestaurant: restaurant,
-      menuItems: restaurant.menu.flatMap((category) => category.items),
+      menuItems: (restaurant.menu ?? []).flatMap((category) => category.items),
     }));
   };
 };

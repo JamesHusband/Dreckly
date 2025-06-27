@@ -4,7 +4,6 @@ import Image from 'next/image';
 import { Plus, Minus } from 'lucide-react';
 import { formatPrice } from '@dreckly/utils';
 import { MenuCategory as MenuCategoryType, Cart } from '@dreckly/types';
-import { IconButton } from '@dreckly/ui-kit';
 
 interface MenuCategoryProps {
   category: MenuCategoryType;
@@ -51,25 +50,27 @@ export function MenuCategory({
                     <div className="flex items-center gap-2">
                       {cart[item.id] > 0 && (
                         <>
-                          <IconButton
-                            icon={<Minus className="h-4 w-4" />}
-                            variant="outline"
-                            size="md"
+                          <button
+                            type="button"
+                            className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
                             onClick={() => onRemoveFromCart(item.id)}
                             aria-label="Remove item"
-                          />
+                          >
+                            <Minus className="h-4 w-4" />
+                          </button>
                           <span className="w-8 text-center font-medium">
                             {cart[item.id]}
                           </span>
                         </>
                       )}
-                      <IconButton
-                        icon={<Plus className="h-4 w-4" />}
-                        variant="primary"
-                        size="md"
+                      <button
+                        type="button"
+                        className="inline-flex items-center justify-center h-8 w-8 rounded-md bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
                         onClick={() => onAddToCart(item.id)}
                         aria-label="Add item"
-                      />
+                      >
+                        <Plus className="h-4 w-4" />
+                      </button>
                     </div>
                   </div>
                 </div>

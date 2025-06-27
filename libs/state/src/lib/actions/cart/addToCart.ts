@@ -13,7 +13,7 @@ export const addToCart = (
         state.currentRestaurant &&
         state.currentRestaurant.id !== restaurant.id
       ) {
-        const newMenuItems = restaurant.menu.flatMap(
+        const newMenuItems = (restaurant.menu ?? []).flatMap(
           (category) => category.items
         );
 
@@ -26,7 +26,7 @@ export const addToCart = (
       }
 
       if (Object.keys(state.cart).length > 0 && !state.currentRestaurant) {
-        const newMenuItems = restaurant.menu.flatMap(
+        const newMenuItems = (restaurant.menu ?? []).flatMap(
           (category) => category.items
         );
 
@@ -38,7 +38,7 @@ export const addToCart = (
         };
       }
 
-      const newMenuItems = restaurant.menu.flatMap(
+      const newMenuItems = (restaurant.menu ?? []).flatMap(
         (category) => category.items
       );
 

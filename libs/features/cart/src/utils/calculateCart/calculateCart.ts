@@ -25,7 +25,9 @@ export const calculateCart = ({
   restaurant,
   serviceFee = 1.49,
 }: CartCalculationParams): CartCalculationResult => {
-  const menuItems = restaurant.menu.flatMap((category) => category.items);
+  const menuItems = (restaurant.menu ?? []).flatMap(
+    (category) => category.items
+  );
 
   const cartItemsList = createCartItemsList(cart, menuItems);
 

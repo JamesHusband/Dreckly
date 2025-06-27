@@ -43,3 +43,10 @@ const createCartStore = () =>
   );
 
 export const useCartStore = createCartStore();
+
+// Function to clear cart storage (for debugging)
+export const clearCartStorage = () => {
+  if (typeof window !== 'undefined') {
+    localStorage.removeItem('cart-storage');
+  }
+};

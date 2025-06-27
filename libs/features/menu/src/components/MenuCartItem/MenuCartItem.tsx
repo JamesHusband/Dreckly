@@ -3,7 +3,6 @@
 import { Plus, Minus } from 'lucide-react';
 import { formatPrice } from '@dreckly/utils';
 import { MenuItem } from '@dreckly/types';
-import { IconButton } from '@dreckly/ui-kit';
 
 interface MenuCartItemProps {
   item: MenuItem;
@@ -27,21 +26,23 @@ export function MenuCartItem({
         <p className="text-xs text-gray-500">{formatPrice(item.price)} each</p>
       </div>
       <div className="flex items-center gap-2">
-        <IconButton
-          icon={<Minus className="h-3 w-3" />}
-          variant="outline"
-          size="sm"
+        <button
+          type="button"
+          className="inline-flex items-center justify-center h-6 w-6 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
           onClick={() => onRemove(item.id)}
           aria-label="Remove item"
-        />
+        >
+          <Minus className="h-3 w-3" />
+        </button>
         <span className="w-6 text-center text-sm">{quantity}</span>
-        <IconButton
-          icon={<Plus className="h-3 w-3" />}
-          variant="primary"
-          size="sm"
+        <button
+          type="button"
+          className="inline-flex items-center justify-center h-6 w-6 rounded-md bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
           onClick={() => onAdd(item.id)}
           aria-label="Add item"
-        />
+        >
+          <Plus className="h-3 w-3" />
+        </button>
       </div>
     </div>
   );

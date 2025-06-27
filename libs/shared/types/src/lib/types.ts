@@ -17,6 +17,19 @@ export interface Cuisine {
     | 'Salad';
 }
 
+export interface MenuItem {
+  id: string;
+  name: string;
+  description: string;
+  price: number;
+  image: string;
+}
+
+export interface MenuCategory {
+  name: string;
+  items: MenuItem[];
+}
+
 export interface Restaurant {
   id: number;
   name: string;
@@ -26,6 +39,11 @@ export interface Restaurant {
   deliveryFee: number;
   image: string;
   featured: boolean;
+  minimumOrder: number;
+  description?: string;
+  address?: string;
+  reviewCount?: number;
+  menu: MenuCategory[];
 }
 
 export interface RestaurantMetaProps {
@@ -39,3 +57,20 @@ export interface RestaurantMetaProps {
   address?: string;
   variant?: 'card' | 'header';
 }
+
+export interface Cart {
+  [itemId: string]: number;
+}
+
+export interface MenuItemProps {
+  name: string;
+  items: MenuItem[];
+  menuIndex: number;
+  menu: MenuCategory[];
+}
+
+export type CartState = {
+  cart: Record<string, number>;
+  currentRestaurant: Restaurant | null;
+  menuItems: MenuItem[];
+};
