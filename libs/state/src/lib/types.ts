@@ -16,7 +16,7 @@ export interface CartActions {
   setItemQuantity: (itemId: string, quantity: number) => void;
   getItemQuantity: (itemId: string) => number;
   getCartItems: () => Array<{ item: MenuItem; quantity: number }>;
-  startNewOrder: (restaurant: Restaurant) => void;
+  startNewOrder: (restaurant: Restaurant, itemId?: string) => void;
 }
 
 export interface RestaurantActions {

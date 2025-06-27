@@ -72,9 +72,8 @@ export const useCartActions = () => {
     (itemId: string, restaurant: Restaurant) => {
       if (!cart) return false;
 
-      // Start new order first, then add the item
-      cart.startNewOrder(restaurant);
-      cart.addToCart(itemId, restaurant);
+      // Start new order and add the item atomically
+      cart.startNewOrder(restaurant, itemId);
       return true;
     },
     [cart]
