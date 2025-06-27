@@ -9,3 +9,4 @@ export async function getUser(): Promise<User> {
 }
 
 export * from './cuisines';
+export * from './restaurants';
