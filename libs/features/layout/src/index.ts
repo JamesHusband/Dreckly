@@ -1,1 +1,1 @@
-export { default as ClientLayout } from './ClientLayout';
+export { ClientLayout } from './components/ClientLayout';
