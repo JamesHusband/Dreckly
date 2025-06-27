@@ -5,11 +5,7 @@
     "module": "commonjs",
     "moduleResolution": "node10",
     "jsx": "react-jsx",
-    "types": [
-      "jest",
-      "node",
-      "@testing-library/jest-dom"
-    ]
+    "types": ["jest", "node"]
   },
   "include": [
     "jest.config.ts",
@@ -21,7 +17,6 @@
     "src/**/*.spec.js",
     "src/**/*.test.jsx",
     "src/**/*.spec.jsx",
-    "src/**/*.d.ts",
-    "../../features/layout/src/components/Footer/Footer.spec.tsx"
+    "src/**/*.d.ts"
   ]
 }
