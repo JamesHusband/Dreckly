@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { CartStore } from '../../types';
-import { CartState } from '@dreckly/types';
+import { CartStore, CartState } from '@dreckly/types';
 import * as cartActions from '../../actions/cart';
 import * as restaurantActions from '../../actions/restaurant';
 

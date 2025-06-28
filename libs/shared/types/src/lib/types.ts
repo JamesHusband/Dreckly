@@ -105,3 +105,9 @@ export interface UseCartReturn {
   itemCount: number;
   totalItems: number;
 }
+
+export interface RestaurantActions {
+  setCurrentRestaurant: (restaurant: Restaurant) => void;
+}
+
+export type CartStore = CartState & CartActions & RestaurantActions;
