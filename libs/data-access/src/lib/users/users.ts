@@ -4,7 +4,7 @@ export const getUsers = async (): Promise<User[]> => {
   return [
     {
       id: 1,
-      firstName: 'Alex',
+      firstName: 'Joe',
       lastName: 'Johnson',
       email: 'alex.johnson@example.com',
       phoneNumber: '+447911123456',
