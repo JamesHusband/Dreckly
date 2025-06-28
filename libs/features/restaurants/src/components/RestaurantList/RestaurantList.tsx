@@ -10,11 +10,11 @@ export const RestaurantList: React.FC = () => {
   const [restaurants, setRestaurants] = useState<Restaurant[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const hasLoaded = useRef(false);
+  const isInitialized = useRef(false);
   const { selectedCuisine, setSelectedCuisine } = useCuisineFilter();
 
   useEffect(() => {
-    if (hasLoaded.current) return;
+    if (isInitialized.current) return;
 
     const loadRestaurants = async () => {
       try {
@@ -25,7 +25,7 @@ export const RestaurantList: React.FC = () => {
         }
         const allRestaurants = await response.json();
         setRestaurants(allRestaurants);
-        hasLoaded.current = true;
+        isInitialized.current = true;
       } catch (error) {
         console.error('Failed to load restaurants:', error);
         setError(error instanceof Error ? error.message : 'An error occurred');
@@ -54,30 +54,49 @@ export const RestaurantList: React.FC = () => {
   }
 
   return (
-    <>
+    <div className="space-y-6">
       {selectedCuisine && (
-        <div className="flex justify-center mb-4">
+        <div className="flex items-center justify-between bg-orange-50 border border-orange-200 rounded-lg p-4">
+          <div className="flex items-center gap-2">
+            <span className="text-sm font-medium text-orange-800">
+              Filtered by: {selectedCuisine}
+            </span>
+          </div>
           <button
             onClick={handleClearFilter}
-            className="flex items-center gap-2 px-4 py-2 text-sm bg-orange-500 text-white hover:bg-orange-600 rounded-lg transition-colors"
+            className="text-orange-600 hover:text-orange-800 p-1"
+            aria-label="Clear filter"
           >
             <X className="h-4 w-4" />
-            Clear filter
           </button>
         </div>
       )}
-      <div className="mb-8">
-        <h2 className="text-3xl font-bold">
-          {selectedCuisine
-            ? `${selectedCuisine} restaurants`
-            : 'All restaurants'}
-        </h2>
-      </div>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredRestaurants.map((restaurant) => (
           <RestaurantCard key={restaurant.id} {...restaurant} />
         ))}
       </div>
-    </>
+
+      {filteredRestaurants.length === 0 && !selectedCuisine && (
+        <div className="text-center py-12">
+          <p className="text-gray-600">No restaurants found.</p>
+        </div>
+      )}
+
+      {filteredRestaurants.length === 0 && selectedCuisine && (
+        <div className="text-center py-12">
+          <p className="text-gray-600">
+            No restaurants found for {selectedCuisine} cuisine.
+          </p>
+          <button
+            onClick={handleClearFilter}
+            className="mt-4 text-orange-600 hover:text-orange-800 font-medium"
+          >
+            Clear filter
+          </button>
+        </div>
+      )}
+    </div>
   );
 };

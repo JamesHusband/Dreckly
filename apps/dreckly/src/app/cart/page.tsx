@@ -18,7 +18,7 @@ import { ItemCounter, BackButton } from '@dreckly/ui-kit';
 const CartPage = () => {
   const { cart, isClient } = useCart();
 
-  const cartCalculation =
+  const cartTotals =
     cart && cart.currentRestaurant
       ? getCartTotals({ cart: cart.cart, restaurant: cart.currentRestaurant })
       : {
@@ -31,7 +31,7 @@ const CartPage = () => {
         };
 
   const { cartItems, subtotal, deliveryFee, serviceFee, total, hasCartItems } =
-    cartCalculation;
+    cartTotals;
 
   if (!isClient || !cart) {
     return (
@@ -51,119 +51,79 @@ const CartPage = () => {
     return <EmptyCart />;
   }
 
+  const handleAddToCart = createAddToCartHandler(addToCart, currentRestaurant);
+  const handleRemoveFromCart = createRemoveFromCartHandler(removeFromCart);
+  const handleSetQuantity = createSetQuantityHandler(setItemQuantity);
+
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
+    <div className="min-h-screen bg-gray-50">
+      <div className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
-          <BackButton />
+          <div className="flex items-center gap-4 mb-8">
+            <BackButton />
+            <h1 className="text-3xl font-bold text-gray-900">Your Cart</h1>
+          </div>
 
-          <h1 className="text-3xl font-bold mb-8">Your Order</h1>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200">
+                <div className="p-6 border-b border-gray-200">
+                  <h2 className="text-xl font-semibold text-gray-900">
+                    Order from {currentRestaurant?.name}
+                  </h2>
+                  <p className="text-gray-600 mt-1">
+                    {cartItems.length} item{cartItems.length !== 1 ? 's' : ''}{' '}
+                    in your cart
+                  </p>
+                </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2 space-y-6">
-              <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
-                <div className="p-4 border-b border-gray-200">
-                  <h3 className="text-lg font-semibold flex items-center gap-2">
-                    <MapPin className="h-5 w-5" />
-                    Delivery Address
-                  </h3>
-                </div>
-                <div className="p-4">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">
-                        123 High Street, Truro, TR1 2AB
-                      </p>
-                      <div className="flex items-center gap-2 text-sm text-gray-600 mt-1">
-                        <Clock className="h-4 w-4" />
-                        <span>Estimated delivery: 25-40 min</span>
-                      </div>
-                    </div>
-                    <button
-                      type="button"
-                      className="border border-gray-300 px-4 py-2 rounded-md hover:bg-gray-50 transition-colors font-medium"
-                    >
-                      Change
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
-                <div className="p-4 border-b border-gray-200">
-                  <h3 className="text-lg font-semibold">
-                    From {currentRestaurant?.name || 'Restaurant'}
-                  </h3>
-                  {currentRestaurant && (
-                    <Link
-                      href={`/restaurant/${currentRestaurant.id}`}
-                      className="text-orange-600 hover:text-orange-500 text-sm"
-                    >
-                      Add more items
-                    </Link>
-                  )}
-                </div>
-                <div className="p-4">
+                <div className="p-6">
                   <div className="space-y-4">
-                    {cartItems.map(
-                      (item: {
-                        id: string;
-                        name: string;
-                        price: number;
-                        image?: string;
-                        quantity: number;
-                      }) => (
-                        <div
-                          key={item.id}
-                          className="flex items-center gap-4 py-4 border-b border-gray-100 last:border-b-0"
-                        >
-                          <Image
-                            src={item.image || '/placeholder.svg'}
-                            alt={item.name}
-                            width={80}
-                            height={80}
-                            className="w-16 h-16 object-cover rounded-lg"
+                    {cartItems.map((item) => (
+                      <div
+                        key={item.id}
+                        className="flex items-center gap-4 p-4 border border-gray-200 rounded-lg"
+                      >
+                        <Image
+                          src={item.image || '/placeholder.svg'}
+                          alt={item.name}
+                          width={80}
+                          height={80}
+                          className="w-20 h-20 object-cover rounded-lg flex-shrink-0"
+                        />
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-gray-900">
+                            {item.name}
+                          </h3>
+                          <p className="text-sm text-gray-600 mt-1">
+                            {item.description}
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {formatPrice(item.price)} each
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-4">
+                          <ItemCounter
+                            id={item.id}
+                            onAdd={() => handleAddToCart(item.id)}
+                            onRemove={() => handleRemoveFromCart(item.id)}
+                            quantity={item.quantity}
                           />
-                          <div className="flex-1">
-                            <h3 className="font-medium">{item.name}</h3>
-                            <p className="text-sm text-gray-600">
-                              {formatPrice(item.price)} each
+                          <div className="text-right">
+                            <p className="font-semibold text-gray-900">
+                              {formatPrice(item.price * item.quantity)}
                             </p>
                           </div>
-                          <div className="flex items-center gap-3">
-                            <ItemCounter
-                              id={item.id}
-                              quantity={item.quantity}
-                              onAdd={createAddToCartHandler(
-                                addToCart,
-                                currentRestaurant
-                              )}
-                              onRemove={() =>
-                                createRemoveFromCartHandler(removeFromCart)(
-                                  item.id
-                                )
-                              }
-                            />
-                            <div className="w-20 text-right font-medium">
-                              {formatPrice(item.price * item.quantity)}
-                            </div>
-                            <button
-                              type="button"
-                              className="text-red-600 hover:text-red-700 hover:bg-red-50 p-1 rounded transition-colors"
-                              onClick={() =>
-                                createSetQuantityHandler(setItemQuantity)(
-                                  item.id,
-                                  0
-                                )
-                              }
-                              aria-label="Remove all items"
-                            >
-                              <Trash2 className="h-4 w-4" />
-                            </button>
-                          </div>
+                          <button
+                            onClick={() => handleRemoveFromCart(item.id)}
+                            className="text-red-500 hover:text-red-700 p-2"
+                            aria-label="Remove item"
+                          >
+                            <Trash2 className="h-5 w-5" />
+                          </button>
                         </div>
-                      )
-                    )}
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>
@@ -173,10 +133,47 @@ const CartPage = () => {
               <CartSidebar
                 restaurant={currentRestaurant}
                 cart={cart.cart}
-                onAddToCart={addToCart}
-                onRemoveFromCart={removeFromCart}
+                onAddToCart={handleAddToCart}
+                onRemoveFromCart={handleRemoveFromCart}
               />
             )}
+          </div>
+
+          <div className="mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <h3 className="text-lg font-semibold text-gray-900 mb-4">
+              Delivery Information
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-gray-400" />
+                <div>
+                  <p className="font-medium text-gray-900">Delivery Address</p>
+                  <p className="text-sm text-gray-600">
+                    123 High Street, Truro, Cornwall TR1 2AB
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Clock className="h-5 w-5 text-gray-400" />
+                <div>
+                  <p className="font-medium text-gray-900">
+                    Estimated Delivery
+                  </p>
+                  <p className="text-sm text-gray-600">
+                    {currentRestaurant?.deliveryTime || '30-45 minutes'}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-8 flex justify-end">
+            <Link
+              href="/checkout"
+              className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
+            >
+              Proceed to Checkout
+            </Link>
           </div>
         </div>
       </div>

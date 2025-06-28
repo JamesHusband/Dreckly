@@ -125,10 +125,9 @@ describe('RestaurantList', () => {
     renderWithProvider(<RestaurantList />);
 
     await waitFor(() => {
-      expect(screen.getByText('All restaurants')).toBeInTheDocument();
+      expect(screen.getByText('Restaurant 1')).toBeInTheDocument();
     });
 
-    expect(screen.getByText('Restaurant 1')).toBeInTheDocument();
     expect(screen.getByText('Restaurant 2')).toBeInTheDocument();
     expect(screen.getByText('Restaurant 3')).toBeInTheDocument();
   });
@@ -142,7 +141,7 @@ describe('RestaurantList', () => {
     renderWithProvider(<RestaurantList />);
 
     await waitFor(() => {
-      expect(screen.getByText('All restaurants')).toBeInTheDocument();
+      expect(screen.getByText('Restaurant 1')).toBeInTheDocument();
     });
 
     expect(screen.queryByText('Clear filter')).not.toBeInTheDocument();
