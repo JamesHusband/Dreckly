@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { CartStore, CartBaseState } from '../../types';
+import { CartStore } from '../../types';
+import { CartState } from '@dreckly/types';
 import * as cartActions from '../../actions/cart';
 import * as restaurantActions from '../../actions/restaurant';
 
-const initialState: CartBaseState = {
+const initialState: CartState = {
   cart: {},
   currentRestaurant: null,
 };
@@ -40,7 +41,6 @@ const createCartStore = () =>
 
 export const useCartStore = createCartStore();
 
-// Function to clear cart storage (for debugging)
 export const clearCartStorage = () => {
   if (typeof window !== 'undefined') {
     localStorage.removeItem('cart-storage');

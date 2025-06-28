@@ -1,6 +1,8 @@
 import { CartState } from '@dreckly/types';
 
-export const setItemQuantity = (set: any) => {
+export const setItemQuantity = (
+  set: (fn: (state: CartState) => CartState) => void
+) => {
   return (itemId: string, quantity: number) => {
     set((state: CartState) => {
       const newCart = { ...state.cart };

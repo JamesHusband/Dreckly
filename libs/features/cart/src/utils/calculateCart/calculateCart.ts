@@ -4,13 +4,15 @@ import { CartItemWithDetails } from '../createCartItemsList';
 import { createCartItemsList } from '../createCartItemsList';
 import { calculateSubtotal } from '../calculateSubtotal';
 
-export interface CartCalculationResult extends ComputedCartState {
+export interface CartCalculationResult {
   cartItemsList: CartItemWithDetails[];
   subtotal: number;
   deliveryFee: number;
   serviceFee: number;
   total: number;
   hasCartItems: boolean;
+  itemCount: number;
+  totalItems: number;
 }
 
 export interface CartCalculationParams {
@@ -30,7 +32,6 @@ export const calculateCart = ({
   const deliveryFee = restaurant.deliveryFee || 0;
   const total = subtotal + deliveryFee + serviceFee;
 
-  // Use shared computation logic
   const computedState = getCartStats({
     cart,
     currentRestaurant: restaurant,
@@ -44,6 +45,7 @@ export const calculateCart = ({
     serviceFee,
     total,
     hasCartItems,
-    ...computedState,
+    itemCount: computedState.itemCount,
+    totalItems: computedState.totalItems,
   };
 };

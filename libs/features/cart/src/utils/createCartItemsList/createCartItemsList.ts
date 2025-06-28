@@ -10,7 +10,6 @@ export const createCartItemsList = (
 ): CartItemWithDetails[] => {
   return Object.entries(cart)
     .map(([itemId, quantity]) => {
-      // Search through all categories to find the item
       const item = restaurant.menu
         ?.flatMap((category) => category.items)
         .find((menuItem) => menuItem.id === itemId);

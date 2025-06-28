@@ -4,7 +4,6 @@ import { Restaurant, Cart } from '@dreckly/types';
 const mockRestaurant: Restaurant = {
   id: 1,
   name: 'Test Restaurant',
-  minOrder: 10,
   cuisine: 'Italian',
   rating: 4.5,
   deliveryTime: '30-45 min',
@@ -53,9 +52,8 @@ const mockRestaurant: Restaurant = {
 describe('createCartItemsList', () => {
   it('should create cart items list with details', () => {
     const cart: Cart = { 'item-1': 2, 'item-3': 1 };
-    const menuItems = mockRestaurant.menu.flatMap((category) => category.items);
 
-    const result = createCartItemsList(cart, menuItems);
+    const result = createCartItemsList(cart, mockRestaurant);
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
@@ -78,9 +76,8 @@ describe('createCartItemsList', () => {
 
   it('should filter out items not in menu', () => {
     const cart: Cart = { 'item-1': 1, 'non-existent': 2 };
-    const menuItems = mockRestaurant.menu.flatMap((category) => category.items);
 
-    const result = createCartItemsList(cart, menuItems);
+    const result = createCartItemsList(cart, mockRestaurant);
 
     expect(result).toHaveLength(1);
     expect(result[0].id).toBe('item-1');
@@ -88,18 +85,16 @@ describe('createCartItemsList', () => {
 
   it('should return empty array for empty cart', () => {
     const cart: Cart = {};
-    const menuItems = mockRestaurant.menu.flatMap((category) => category.items);
 
-    const result = createCartItemsList(cart, menuItems);
+    const result = createCartItemsList(cart, mockRestaurant);
 
     expect(result).toHaveLength(0);
   });
 
   it('should handle zero quantities', () => {
     const cart: Cart = { 'item-1': 0, 'item-3': 1 };
-    const menuItems = mockRestaurant.menu.flatMap((category) => category.items);
 
-    const result = createCartItemsList(cart, menuItems);
+    const result = createCartItemsList(cart, mockRestaurant);
 
     expect(result).toHaveLength(2);
     expect(result[0].quantity).toBe(0);

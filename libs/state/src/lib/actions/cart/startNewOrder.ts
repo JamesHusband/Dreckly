@@ -1,6 +1,8 @@
 import { CartState, Restaurant } from '@dreckly/types';
 
-export const startNewOrder = (set: any) => {
+export const startNewOrder = (
+  set: (fn: (state: CartState) => CartState) => void
+) => {
   return (restaurant: Restaurant, itemId?: string) => {
     set((state: CartState) => {
       const newState = {

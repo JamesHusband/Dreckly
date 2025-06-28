@@ -21,7 +21,6 @@ export const useCartActions = () => {
         cartItems: Object.keys(cart.cart).length,
       });
 
-      // Only show confirmation if there are items in cart AND it's a different restaurant
       if (
         cart.currentRestaurant &&
         cart.currentRestaurant.id !== restaurant.id &&
@@ -71,7 +70,6 @@ export const useCartActions = () => {
     (itemId: string, restaurant: Restaurant) => {
       if (!cart) return false;
 
-      // Start new order and add the item atomically
       cart.startNewOrder(restaurant, itemId);
       return true;
     },

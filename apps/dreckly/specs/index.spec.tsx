@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react';
 import Page from '../src/app/page';
 
 global.fetch = jest.fn(() =>
@@ -21,7 +21,9 @@ describe('Page', () => {
   });
 
   it('should render successfully', async () => {
-    const { baseElement } = await render(await Page());
-    expect(baseElement).toBeTruthy();
+    const { baseElement } = render(<Page />);
+    await waitFor(() => {
+      expect(baseElement).toBeTruthy();
+    });
   });
 });

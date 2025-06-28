@@ -1,6 +1,8 @@
 import { CartState } from '@dreckly/types';
 
-export const removeFromCart = (set: any) => {
+export const removeFromCart = (
+  set: (fn: (state: CartState) => CartState) => void
+) => {
   return (itemId: string) => {
     set((state: CartState) => {
       const newCart = { ...state.cart };

@@ -4,7 +4,6 @@ import { Restaurant, Cart } from '@dreckly/types';
 const mockRestaurant: Restaurant = {
   id: 1,
   name: 'Test Restaurant',
-  minOrder: 10,
   cuisine: 'Italian',
   rating: 4.5,
   deliveryTime: '30-45 min',
