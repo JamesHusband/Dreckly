@@ -1,9 +1,9 @@
 import Image from 'next/image';
-import { MenuItemProps } from '@dreckly/types';
+import { MenuProps } from '@dreckly/types';
 import { ItemCounter } from '@dreckly/ui-kit';
 import { formatPrice } from '@dreckly/utils';
 
-export const MenuItem = ({ name, items, menuIndex, menu }: MenuItemProps) => {
+export const MenuItem = ({ name, items, menuIndex, menu }: MenuProps) => {
   return (
     <div key={name} className="mb-8">
       <h2 className="text-2xl font-bold mb-4">{name}</h2>

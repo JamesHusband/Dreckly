@@ -22,7 +22,7 @@ const CartPage = () => {
     cart && cart.currentRestaurant
       ? calculateCart({ cart: cart.cart, restaurant: cart.currentRestaurant })
       : {
-          cartItemsList: [],
+          cartItems: [],
           subtotal: 0,
           deliveryFee: 0,
           serviceFee: 1.49,
@@ -30,14 +30,8 @@ const CartPage = () => {
           hasCartItems: false,
         };
 
-  const {
-    cartItemsList,
-    subtotal,
-    deliveryFee,
-    serviceFee,
-    total,
-    hasCartItems,
-  } = cartCalculation;
+  const { cartItems, subtotal, deliveryFee, serviceFee, total, hasCartItems } =
+    cartCalculation;
 
   if (!isClient || !cart) {
     return (
@@ -111,7 +105,7 @@ const CartPage = () => {
                 </div>
                 <div className="p-4">
                   <div className="space-y-4">
-                    {cartItemsList.map(
+                    {cartItems.map(
                       (item: {
                         id: string;
                         name: string;
@@ -177,11 +171,10 @@ const CartPage = () => {
 
             {currentRestaurant && (
               <CartSidebar
-                subtotal={subtotal}
-                deliveryFee={deliveryFee}
-                serviceFee={serviceFee}
-                total={total}
-                currentRestaurant={currentRestaurant}
+                restaurant={currentRestaurant}
+                cart={cart.cart}
+                onAddToCart={addToCart}
+                onRemoveFromCart={removeFromCart}
               />
             )}
           </div>

@@ -1,9 +1,9 @@
 import { calculateSubtotal } from './calculateSubtotal';
-import { CartItemWithDetails } from '../createCartItemsList';
+import { CartItem } from '@dreckly/types';
 
 describe('calculateSubtotal', () => {
   it('should calculate subtotal correctly', () => {
-    const cartItemsList: CartItemWithDetails[] = [
+    const cartItemsList: CartItem[] = [
       {
         id: 'item-1',
         name: 'Bruschetta',
@@ -33,7 +33,7 @@ describe('calculateSubtotal', () => {
   });
 
   it('should handle zero quantities', () => {
-    const cartItemsList: CartItemWithDetails[] = [
+    const cartItemsList: CartItem[] = [
       {
         id: 'item-1',
         name: 'Bruschetta',
@@ -58,7 +58,7 @@ describe('calculateSubtotal', () => {
   });
 
   it('should handle large quantities', () => {
-    const cartItemsList: CartItemWithDetails[] = [
+    const cartItemsList: CartItem[] = [
       {
         id: 'item-1',
         name: 'Bruschetta',
@@ -75,7 +75,7 @@ describe('calculateSubtotal', () => {
   });
 
   it('should handle decimal prices correctly', () => {
-    const cartItemsList: CartItemWithDetails[] = [
+    const cartItemsList: CartItem[] = [
       {
         id: 'item-1',
         name: 'Bruschetta',

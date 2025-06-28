@@ -1,9 +1,9 @@
-import { MenuItem, Restaurant, CartItemWithDetails } from '@dreckly/types';
+import { MenuItem, Restaurant, CartItem } from '@dreckly/types';
 
 export const createCartItemsList = (
   cart: Record<string, number>,
   restaurant: Restaurant
-): CartItemWithDetails[] => {
+): CartItem[] => {
   return Object.entries(cart)
     .map(([itemId, quantity]) => {
       const item = restaurant.menu
@@ -11,5 +11,5 @@ export const createCartItemsList = (
         .find((menuItem) => menuItem.id === itemId);
       return item ? { ...item, quantity } : null;
     })
-    .filter((item): item is CartItemWithDetails => item !== null);
+    .filter((item): item is CartItem => item !== null);
 };

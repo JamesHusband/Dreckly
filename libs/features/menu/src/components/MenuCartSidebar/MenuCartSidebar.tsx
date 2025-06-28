@@ -2,14 +2,14 @@ import Link from 'next/link';
 import { formatPrice } from '@dreckly/utils';
 import { calculateCart } from '@dreckly/cart';
 import { MenuCartItem } from '../MenuCartItem';
-import { Restaurant, Cart, MenuCartSidebarProps } from '@dreckly/types';
+import { Restaurant, Cart, CartSidebarProps } from '@dreckly/types';
 
 export const MenuCartSidebar = ({
   restaurant,
   cart,
   onAddToCart,
   onRemoveFromCart,
-}: MenuCartSidebarProps) => {
+}: CartSidebarProps) => {
   const { subtotal, hasCartItems } = calculateCart({ cart, restaurant });
 
   return (

@@ -56,7 +56,7 @@ describe('calculateCart', () => {
     const result = calculateCart({ cart, restaurant: mockRestaurant });
 
     expect(result).toEqual({
-      cartItemsList: expect.arrayContaining([
+      cartItems: expect.arrayContaining([
         expect.objectContaining({ id: 'item-1', quantity: 2 }),
         expect.objectContaining({ id: 'item-3', quantity: 1 }),
       ]),
@@ -76,7 +76,7 @@ describe('calculateCart', () => {
     const result = calculateCart({ cart, restaurant: mockRestaurant });
 
     expect(result).toEqual({
-      cartItemsList: [],
+      cartItems: [],
       subtotal: 0,
       deliveryFee: 2.99,
       serviceFee: 1.49,
