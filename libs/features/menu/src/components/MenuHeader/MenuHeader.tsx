@@ -1,9 +1,9 @@
 import { Restaurant } from '@dreckly/types';
 import Image from 'next/image';
 import { RestaurantMeta } from '@dreckly/restaurants';
+import { getImage } from '@dreckly/utils';
 
 export const MenuHeader = ({
-  image,
   name,
   description,
   rating,
@@ -15,7 +15,7 @@ export const MenuHeader = ({
   return (
     <div className="relative">
       <Image
-        src={image || '/placeholder.svg'}
+        src={getImage('cover', name)}
         alt={name}
         width={800}
         height={300}

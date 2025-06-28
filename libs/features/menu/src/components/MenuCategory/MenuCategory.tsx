@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Plus, Minus } from 'lucide-react';
-import { formatPrice } from '@dreckly/utils';
+import { formatPrice, getImage } from '@dreckly/utils';
 import { MenuCategory as MenuCategoryType, Cart } from '@dreckly/types';
 
 interface MenuCategoryProps {
@@ -11,6 +11,7 @@ interface MenuCategoryProps {
   onAddToCart: (itemId: string) => void;
   onRemoveFromCart: (itemId: string) => void;
   isLast?: boolean;
+  restaurantName: string;
 }
 
 export function MenuCategory({
@@ -19,6 +20,7 @@ export function MenuCategory({
   onAddToCart,
   onRemoveFromCart,
   isLast = false,
+  restaurantName,
 }: MenuCategoryProps) {
   return (
     <div className="mb-8">
@@ -32,7 +34,7 @@ export function MenuCategory({
             <div className="p-4">
               <div className="flex gap-4">
                 <Image
-                  src={item.image}
+                  src={getImage('menu', restaurantName, item.name)}
                   alt={item.name}
                   width={100}
                   height={100}
@@ -48,28 +50,20 @@ export function MenuCategory({
                       {formatPrice(item.price)}
                     </span>
                     <div className="flex items-center gap-2">
-                      {cart[item.id] > 0 && (
-                        <>
-                          <button
-                            type="button"
-                            className="inline-flex items-center justify-center h-8 w-8 rounded-md border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
-                            onClick={() => onRemoveFromCart(item.id)}
-                            aria-label="Remove item"
-                          >
-                            <Minus className="h-4 w-4" />
-                          </button>
-                          <span className="w-8 text-center font-medium">
-                            {cart[item.id]}
-                          </span>
-                        </>
-                      )}
                       <button
-                        type="button"
-                        className="inline-flex items-center justify-center h-8 w-8 rounded-md bg-orange-500 text-white hover:bg-orange-600 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 transition-colors"
-                        onClick={() => onAddToCart(item.id)}
-                        aria-label="Add item"
+                        onClick={() => onRemoveFromCart(item.id)}
+                        className="p-1 rounded-full bg-gray-100 hover:bg-gray-200"
                       >
-                        <Plus className="h-4 w-4" />
+                        <Minus size={16} />
+                      </button>
+                      <span className="w-8 text-center">
+                        {cart[item.id] || 0}
+                      </span>
+                      <button
+                        onClick={() => onAddToCart(item.id)}
+                        className="p-1 rounded-full bg-gray-100 hover:bg-gray-200"
+                      >
+                        <Plus size={16} />
                       </button>
                     </div>
                   </div>

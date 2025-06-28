@@ -2,10 +2,10 @@ import { Restaurant } from '@dreckly/types';
 import Link from 'next/link';
 import Image from 'next/image';
 import { RestaurantMeta } from '../RestaurantMeta';
+import { getImage } from '@dreckly/utils';
 
 export const RestaurantCard = ({
   id,
-  image,
   name,
   cuisine,
   rating,
@@ -21,7 +21,7 @@ export const RestaurantCard = ({
     >
       <div className="relative">
         <Image
-          src={image || '/placeholder.svg'}
+          src={getImage('logo', name)}
           alt={name}
           width={300}
           height={200}

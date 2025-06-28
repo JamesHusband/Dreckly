@@ -66,6 +66,7 @@ export function Menu({ restaurant }: RestaurantMenuProps) {
                   onAddToCart={handleAddToCart}
                   onRemoveFromCart={handleRemoveFromCart}
                   isLast={menuIndex === (restaurant.menu?.length ?? 0) - 1}
+                  restaurantName={restaurant.name}
                 />
               ))}
             </div>
