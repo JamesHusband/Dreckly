@@ -10,17 +10,17 @@ import {
   createSetQuantityHandler,
   CartSidebar,
   EmptyCart,
+  getCartTotals,
 } from '@dreckly/cart';
 import { formatPrice } from '@dreckly/utils';
 import { ItemCounter, BackButton } from '@dreckly/ui-kit';
-import { calculateCart } from '@dreckly/cart';
 
 const CartPage = () => {
   const { cart, isClient } = useCart();
 
   const cartCalculation =
     cart && cart.currentRestaurant
-      ? calculateCart({ cart: cart.cart, restaurant: cart.currentRestaurant })
+      ? getCartTotals({ cart: cart.cart, restaurant: cart.currentRestaurant })
       : {
           cartItems: [],
           subtotal: 0,

@@ -3,29 +3,29 @@ import { getCartStats } from '@dreckly/utils';
 import { createCartItemsList } from '../createCartItemsList';
 import { calculateSubtotal } from '../calculateSubtotal';
 
-export const calculateCart = ({
+export const getCartTotals = ({
   cart,
   restaurant,
   serviceFee = 1.49,
 }: CartCalculationParams): CartCalculationResult => {
-  const cartItemsList = createCartItemsList(cart, restaurant);
+  const cartItems = createCartItemsList(cart, restaurant);
 
-  const subtotal = calculateSubtotal(cartItemsList);
+  const subtotal = calculateSubtotal(cartItems);
 
-  const computedState = getCartStats({
+  const cartStats = getCartStats({
     cart,
     currentRestaurant: restaurant,
   });
-  const hasCartItems = computedState.itemCount > 0;
+  const hasCartItems = cartStats.itemCount > 0;
 
   return {
-    cartItems: cartItemsList,
+    cartItems,
     subtotal,
     deliveryFee: restaurant.deliveryFee,
     serviceFee,
     total: subtotal + restaurant.deliveryFee + serviceFee,
     hasCartItems,
-    itemCount: computedState.itemCount,
-    totalItems: computedState.totalItems,
+    itemCount: cartStats.itemCount,
+    totalItems: cartStats.totalItems,
   };
 };

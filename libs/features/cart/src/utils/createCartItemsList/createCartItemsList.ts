@@ -1,4 +1,4 @@
-import { MenuItem, Restaurant, CartItem } from '@dreckly/types';
+import { Restaurant, CartItem } from '@dreckly/types';
 
 export const createCartItemsList = (
   cart: Record<string, number>,

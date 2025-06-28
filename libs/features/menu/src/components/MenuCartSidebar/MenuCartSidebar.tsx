@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { formatPrice } from '@dreckly/utils';
-import { calculateCart } from '@dreckly/cart';
+import { getCartTotals } from '@dreckly/cart';
 import { MenuCartItem } from '../MenuCartItem';
 import { Restaurant, Cart, CartSidebarProps } from '@dreckly/types';
 
@@ -10,7 +10,7 @@ export const MenuCartSidebar = ({
   onAddToCart,
   onRemoveFromCart,
 }: CartSidebarProps) => {
-  const { subtotal, hasCartItems } = calculateCart({ cart, restaurant });
+  const { subtotal, hasCartItems } = getCartTotals({ cart, restaurant });
 
   return (
     <div className="lg:col-span-1">

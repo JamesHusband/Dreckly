@@ -1,4 +1,4 @@
-import { calculateCart } from './calculateCart';
+import { getCartTotals } from './getCartTotals';
 import { Restaurant, Cart } from '@dreckly/types';
 
 const mockRestaurant: Restaurant = {
@@ -49,11 +49,11 @@ const mockRestaurant: Restaurant = {
   ],
 };
 
-describe('calculateCart', () => {
+describe('getCartTotals', () => {
   it('should calculate comprehensive cart details', () => {
     const cart: Cart = { 'item-1': 2, 'item-3': 1 };
 
-    const result = calculateCart({ cart, restaurant: mockRestaurant });
+    const result = getCartTotals({ cart, restaurant: mockRestaurant });
 
     expect(result).toEqual({
       cartItems: expect.arrayContaining([
@@ -73,7 +73,7 @@ describe('calculateCart', () => {
   it('should handle empty cart', () => {
     const cart: Cart = {};
 
-    const result = calculateCart({ cart, restaurant: mockRestaurant });
+    const result = getCartTotals({ cart, restaurant: mockRestaurant });
 
     expect(result).toEqual({
       cartItems: [],
@@ -90,7 +90,7 @@ describe('calculateCart', () => {
   it('should use custom service fee', () => {
     const cart: Cart = { 'item-1': 1 };
 
-    const result = calculateCart({
+    const result = getCartTotals({
       cart,
       restaurant: mockRestaurant,
       serviceFee: 2.5,
@@ -107,7 +107,7 @@ describe('calculateCart', () => {
     };
     const cart: Cart = { 'item-1': 1 };
 
-    const result = calculateCart({
+    const result = getCartTotals({
       cart,
       restaurant: restaurantWithoutDelivery,
     });

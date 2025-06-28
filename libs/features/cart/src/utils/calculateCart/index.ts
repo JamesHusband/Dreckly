@@ -1,1 +1,1 @@
-export * from './calculateCart';
+export * from './getCartTotals';
