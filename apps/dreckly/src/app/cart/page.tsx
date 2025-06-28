@@ -5,20 +5,31 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {
   useCart,
-  useCartCalculations,
-  useRestaurantLoader,
   createAddToCartHandler,
   createRemoveFromCartHandler,
   createSetQuantityHandler,
   CartSidebar,
+  EmptyCart,
 } from '@dreckly/cart';
 import { formatPrice } from '@dreckly/utils';
 import { ItemCounter, BackButton } from '@dreckly/ui-kit';
-import { EmptyCart } from '@dreckly/cart';
+import { calculateCart } from '@dreckly/cart';
 
 export default function CartPage() {
-  const { cart } = useCart();
-  const { isClient } = useRestaurantLoader();
+  const { cart, isClient } = useCart();
+
+  const cartCalculation =
+    cart && cart.currentRestaurant
+      ? calculateCart({ cart: cart.cart, restaurant: cart.currentRestaurant })
+      : {
+          cartItemsList: [],
+          subtotal: 0,
+          deliveryFee: 0,
+          serviceFee: 1.49,
+          total: 0,
+          hasCartItems: false,
+        };
+
   const {
     cartItemsList,
     subtotal,
@@ -26,7 +37,7 @@ export default function CartPage() {
     serviceFee,
     total,
     hasCartItems,
-  } = useCartCalculations();
+  } = cartCalculation;
 
   if (!isClient || !cart) {
     return (
@@ -55,9 +66,7 @@ export default function CartPage() {
           <h1 className="text-3xl font-bold mb-8">Your Order</h1>
 
           <div className="grid lg:grid-cols-3 gap-8">
-            {/* Cart Items */}
             <div className="lg:col-span-2 space-y-6">
-              {/* Delivery Address */}
               <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
                 <div className="p-4 border-b border-gray-200">
                   <h3 className="text-lg font-semibold flex items-center gap-2">
@@ -86,7 +95,6 @@ export default function CartPage() {
                 </div>
               </div>
 
-              {/* Cart Items by Restaurant */}
               <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
                 <div className="p-4 border-b border-gray-200">
                   <h3 className="text-lg font-semibold">
@@ -103,57 +111,65 @@ export default function CartPage() {
                 </div>
                 <div className="p-4">
                   <div className="space-y-4">
-                    {cartItemsList.map((item) => (
-                      <div
-                        key={item.id}
-                        className="flex items-center gap-4 py-4 border-b border-gray-100 last:border-b-0"
-                      >
-                        <Image
-                          src={item.image || '/placeholder.svg'}
-                          alt={item.name}
-                          width={80}
-                          height={80}
-                          className="w-16 h-16 object-cover rounded-lg"
-                        />
-                        <div className="flex-1">
-                          <h3 className="font-medium">{item.name}</h3>
-                          <p className="text-sm text-gray-600">
-                            {formatPrice(item.price)} each
-                          </p>
-                        </div>
-                        <div className="flex items-center gap-3">
-                          <ItemCounter
-                            id={item.id}
-                            quantity={item.quantity}
-                            onAdd={createAddToCartHandler(
-                              addToCart,
-                              currentRestaurant
-                            )}
-                            onRemove={() =>
-                              createRemoveFromCartHandler(removeFromCart)(
-                                item.id
-                              )
-                            }
+                    {cartItemsList.map(
+                      (item: {
+                        id: string;
+                        name: string;
+                        price: number;
+                        image?: string;
+                        quantity: number;
+                      }) => (
+                        <div
+                          key={item.id}
+                          className="flex items-center gap-4 py-4 border-b border-gray-100 last:border-b-0"
+                        >
+                          <Image
+                            src={item.image || '/placeholder.svg'}
+                            alt={item.name}
+                            width={80}
+                            height={80}
+                            className="w-16 h-16 object-cover rounded-lg"
                           />
-                          <div className="w-20 text-right font-medium">
-                            {formatPrice(item.price * item.quantity)}
+                          <div className="flex-1">
+                            <h3 className="font-medium">{item.name}</h3>
+                            <p className="text-sm text-gray-600">
+                              {formatPrice(item.price)} each
+                            </p>
                           </div>
-                          <button
-                            type="button"
-                            className="text-red-600 hover:text-red-700 hover:bg-red-50 p-1 rounded transition-colors"
-                            onClick={() =>
-                              createSetQuantityHandler(setItemQuantity)(
-                                item.id,
-                                0
-                              )
-                            }
-                            aria-label="Remove all items"
-                          >
-                            <Trash2 className="h-4 w-4" />
-                          </button>
+                          <div className="flex items-center gap-3">
+                            <ItemCounter
+                              id={item.id}
+                              quantity={item.quantity}
+                              onAdd={createAddToCartHandler(
+                                addToCart,
+                                currentRestaurant
+                              )}
+                              onRemove={() =>
+                                createRemoveFromCartHandler(removeFromCart)(
+                                  item.id
+                                )
+                              }
+                            />
+                            <div className="w-20 text-right font-medium">
+                              {formatPrice(item.price * item.quantity)}
+                            </div>
+                            <button
+                              type="button"
+                              className="text-red-600 hover:text-red-700 hover:bg-red-50 p-1 rounded transition-colors"
+                              onClick={() =>
+                                createSetQuantityHandler(setItemQuantity)(
+                                  item.id,
+                                  0
+                                )
+                              }
+                              aria-label="Remove all items"
+                            >
+                              <Trash2 className="h-4 w-4" />
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    ))}
+                      )
+                    )}
                   </div>
                 </div>
               </div>

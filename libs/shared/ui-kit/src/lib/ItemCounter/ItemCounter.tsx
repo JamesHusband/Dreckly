@@ -63,9 +63,9 @@ export function ItemCounter({
     );
   }
 
-  const { getCartQuantity, addToCart, removeFromCart } = cart;
+  const { getItemQuantity, addToCart, removeFromCart } = cart;
 
-  const itemQuantity = quantity ?? getCartQuantity(id);
+  const itemQuantity = quantity ?? getItemQuantity(id);
 
   const handleAdd = onAdd ?? addToCart;
   const handleRemove = onRemove ?? removeFromCart;
