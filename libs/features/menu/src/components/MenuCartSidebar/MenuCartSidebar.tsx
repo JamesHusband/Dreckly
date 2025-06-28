@@ -11,12 +11,12 @@ interface MenuCartSidebarProps {
   onRemoveFromCart: (itemId: string) => void;
 }
 
-export function MenuCartSidebar({
+export const MenuCartSidebar = ({
   restaurant,
   cart,
   onAddToCart,
   onRemoveFromCart,
-}: MenuCartSidebarProps) {
+}: MenuCartSidebarProps) => {
   const { subtotal, hasCartItems } = calculateCart({ cart, restaurant });
 
   return (
@@ -84,4 +84,4 @@ export function MenuCartSidebar({
       </div>
     </div>
   );
-}
+};

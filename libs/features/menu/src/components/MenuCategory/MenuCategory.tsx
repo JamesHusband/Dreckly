@@ -14,14 +14,14 @@ interface MenuCategoryProps {
   restaurantName: string;
 }
 
-export function MenuCategory({
+export const MenuCategory = ({
   category,
   cart,
   onAddToCart,
   onRemoveFromCart,
   isLast = false,
   restaurantName,
-}: MenuCategoryProps) {
+}: MenuCategoryProps) => {
   return (
     <div className="mb-8">
       <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
@@ -76,4 +76,4 @@ export function MenuCategory({
       {!isLast && <hr className="my-8 border-gray-200" />}
     </div>
   );
-}
+};

@@ -13,7 +13,7 @@ interface RestaurantMenuProps {
   restaurant: Restaurant;
 }
 
-export function Menu({ restaurant }: RestaurantMenuProps) {
+export const Menu = ({ restaurant }: RestaurantMenuProps) => {
   const {
     addToCart,
     removeFromCart,
@@ -92,4 +92,4 @@ export function Menu({ restaurant }: RestaurantMenuProps) {
       />
     </>
   );
-}
+};

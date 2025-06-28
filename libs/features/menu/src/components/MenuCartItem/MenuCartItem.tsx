@@ -11,12 +11,12 @@ interface MenuCartItemProps {
   onRemove: (itemId: string) => void;
 }
 
-export function MenuCartItem({
+export const MenuCartItem = ({
   item,
   quantity,
   onAdd,
   onRemove,
-}: MenuCartItemProps) {
+}: MenuCartItemProps) => {
   if (quantity === 0) return null;
 
   return (
@@ -46,4 +46,4 @@ export function MenuCartItem({
       </div>
     </div>
   );
-}
+};

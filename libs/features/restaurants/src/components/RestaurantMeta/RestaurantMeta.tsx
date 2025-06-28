@@ -4,9 +4,9 @@ import React from 'react';
 import { Star, Clock, Truck, MapPin } from 'lucide-react';
 import { RestaurantMetaProps } from '@dreckly/types';
 
-export function formatPrice(value: number) {
+export const formatPrice = (value: number) => {
   return `£${value}`;
-}
+};
 
 export const RestaurantMeta: React.FC<RestaurantMetaProps> = ({
   name,

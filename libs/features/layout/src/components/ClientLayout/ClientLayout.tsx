@@ -2,7 +2,7 @@ import { Header } from '..';
 import { Footer } from '../Footer';
 import { CuisineProvider } from '@dreckly/home';
 
-export function ClientLayout({ children }: { children: React.ReactNode }) {
+export const ClientLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <CuisineProvider>
       <Header />
@@ -10,4 +10,4 @@ export function ClientLayout({ children }: { children: React.ReactNode }) {
       <Footer />
     </CuisineProvider>
   );
-}
+};

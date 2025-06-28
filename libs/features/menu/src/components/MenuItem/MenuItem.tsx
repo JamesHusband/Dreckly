@@ -3,7 +3,7 @@ import { MenuItemProps } from '@dreckly/types';
 import { ItemCounter } from '@dreckly/ui-kit';
 import { formatPrice } from '@dreckly/utils';
 
-export function MenuItem({ name, items, menuIndex, menu }: MenuItemProps) {
+export const MenuItem = ({ name, items, menuIndex, menu }: MenuItemProps) => {
   return (
     <div key={name} className="mb-8">
       <h2 className="text-2xl font-bold mb-4">{name}</h2>
@@ -16,7 +16,7 @@ export function MenuItem({ name, items, menuIndex, menu }: MenuItemProps) {
             <div className="p-4">
               <div className="flex gap-4">
                 <Image
-                  src={item.image}
+                  src={item.image || '/placeholder.svg'}
                   alt={item.name}
                   width={100}
                   height={100}
@@ -44,4 +44,4 @@ export function MenuItem({ name, items, menuIndex, menu }: MenuItemProps) {
       )}
     </div>
   );
-}
+};

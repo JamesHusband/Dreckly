@@ -1,6 +1,7 @@
 import { formatPrice } from '@dreckly/utils';
 import { Clock } from 'lucide-react';
 import { Restaurant } from '@dreckly/types';
+
 interface CartSidebarProps {
   subtotal: number;
   deliveryFee: number;
@@ -8,13 +9,14 @@ interface CartSidebarProps {
   total: number;
   currentRestaurant: Restaurant;
 }
-export function CartSidebar({
+
+export const CartSidebar = ({
   subtotal,
   deliveryFee,
   serviceFee,
   total,
   currentRestaurant,
-}: CartSidebarProps) {
+}: CartSidebarProps) => {
   return (
     <div className="lg:col-span-1">
       <div className="bg-white border border-gray-200 rounded-lg shadow-sm sticky top-24">
@@ -76,4 +78,4 @@ export function CartSidebar({
       </div>
     </div>
   );
-}
+};

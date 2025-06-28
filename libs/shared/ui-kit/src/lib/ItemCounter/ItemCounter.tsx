@@ -11,12 +11,12 @@ interface ItemCounterProps {
   quantity?: number;
 }
 
-export function ItemCounter({
+export const ItemCounter = ({
   id,
   onAdd,
   onRemove,
   quantity,
-}: ItemCounterProps) {
+}: ItemCounterProps) => {
   const { cart } = useCart();
 
   if (!cart) {
@@ -93,4 +93,4 @@ export function ItemCounter({
       />
     </div>
   );
-}
+};
