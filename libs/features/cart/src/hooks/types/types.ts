@@ -11,5 +11,5 @@ export interface UseCartReturn {
   totalItems: number;
   currentRestaurant: Restaurant | null;
   setCurrentRestaurant: (restaurant: Restaurant) => void;
-  startNewOrder: (restaurant: Restaurant) => void;
+  startNewOrder: (restaurant: Restaurant, itemId?: string) => void;
 }
