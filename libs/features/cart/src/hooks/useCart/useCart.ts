@@ -2,8 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useCartStore } from '@dreckly/state';
-import { Restaurant } from '@dreckly/types';
-import { UseCartReturn } from '../types';
+import { Restaurant, UseCartReturn } from '@dreckly/types';
 
 export const useCart = (): {
   cart: UseCartReturn | null;

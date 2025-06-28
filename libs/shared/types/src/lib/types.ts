@@ -88,3 +88,20 @@ export interface ComputedCartState {
   itemCount: number;
   totalItems: number;
 }
+
+export interface UseCartReturn {
+  cart: Record<string, number>;
+  currentRestaurant: Restaurant | null;
+  setCurrentRestaurant: (restaurant: Restaurant) => void;
+  // Cart actions
+  addToCart: (itemId: string, restaurant?: Restaurant) => void;
+  removeFromCart: (itemId: string) => void;
+  clearCart: () => void;
+  setItemQuantity: (itemId: string, quantity: number) => void;
+  getItemQuantity: (itemId: string) => number;
+  getCartItems: () => Array<{ item: MenuItem; quantity: number }>;
+  startNewOrder: (restaurant: Restaurant, itemId?: string) => void;
+  // Computed values
+  itemCount: number;
+  totalItems: number;
+}
