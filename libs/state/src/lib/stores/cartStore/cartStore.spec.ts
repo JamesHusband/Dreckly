@@ -181,7 +181,7 @@ describe('CartStore', () => {
       const cartItems = result.current.getCartItems();
       expect(cartItems).toHaveLength(1);
       expect(cartItems[0]).toEqual({
-        item: mockRestaurant.menu[0].items[0],
+        ...mockRestaurant.menu[0].items[0],
         quantity: 2,
       });
     });

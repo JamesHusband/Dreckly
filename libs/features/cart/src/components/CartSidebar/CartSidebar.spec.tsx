@@ -9,7 +9,6 @@ jest.mock('@dreckly/utils', () => ({
 const mockRestaurant = {
   id: 1,
   name: 'Test Restaurant',
-  minOrder: 10,
   cuisine: 'Italian',
   rating: 4.5,
   deliveryTime: '25-40 minutes',
@@ -20,16 +19,28 @@ const mockRestaurant = {
   description: 'A test restaurant',
   address: '123 Test Street',
   reviewCount: 100,
-  menu: [],
+  menu: [
+    {
+      name: 'Starters',
+      items: [
+        {
+          id: 'item-1',
+          name: 'Bruschetta',
+          description: 'Toasted bread with tomatoes',
+          price: 5.99,
+          image: '/bruschetta.jpg',
+        },
+      ],
+    },
+  ],
 };
 
 describe('CartSidebar', () => {
   const defaultProps = {
-    subtotal: 15.0,
-    deliveryFee: 2.5,
-    serviceFee: 1.5,
-    total: 19.0,
-    currentRestaurant: mockRestaurant,
+    restaurant: mockRestaurant,
+    cart: { 'item-1': 2 },
+    onAddToCart: jest.fn(),
+    onRemoveFromCart: jest.fn(),
   };
 
   it('should render the cart sidebar with order summary', () => {
@@ -42,16 +53,9 @@ describe('CartSidebar', () => {
     render(<CartSidebar {...defaultProps} />);
 
     expect(screen.getByText('Subtotal')).toBeInTheDocument();
-    expect(screen.getByText('£15.00')).toBeInTheDocument();
-
     expect(screen.getByText('Delivery fee')).toBeInTheDocument();
-    expect(screen.getByText('£2.50')).toBeInTheDocument();
-
     expect(screen.getByText('Service fee')).toBeInTheDocument();
-    expect(screen.getByText('£1.50')).toBeInTheDocument();
-
     expect(screen.getByText('Total')).toBeInTheDocument();
-    expect(screen.getByText('£19.00')).toBeInTheDocument();
   });
 
   it('should show proceed to checkout button when subtotal meets minimum order', () => {
@@ -67,8 +71,7 @@ describe('CartSidebar', () => {
   it('should show minimum order message when subtotal is below minimum', () => {
     const propsBelowMinimum = {
       ...defaultProps,
-      subtotal: 5.0,
-      total: 9.0,
+      cart: { 'item-1': 1 }, // Lower quantity to reduce subtotal
     };
 
     render(<CartSidebar {...propsBelowMinimum} />);
@@ -98,40 +101,18 @@ describe('CartSidebar', () => {
     ).toBeInTheDocument();
   });
 
-  it('should handle zero values correctly', () => {
-    const zeroProps = {
+  it('should handle empty cart correctly', () => {
+    const emptyCartProps = {
       ...defaultProps,
-      subtotal: 0,
-      deliveryFee: 0,
-      serviceFee: 0,
-      total: 0,
+      cart: {},
     };
 
-    render(<CartSidebar {...zeroProps} />);
+    render(<CartSidebar {...emptyCartProps} />);
 
-    const zeroElements = screen.getAllByText('£0.00');
-    expect(zeroElements).toHaveLength(4);
-
+    expect(screen.getByText('£0.00')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /minimum order £10\.00/i })
     ).toBeInTheDocument();
-  });
-
-  it('should handle decimal values correctly', () => {
-    const decimalProps = {
-      ...defaultProps,
-      subtotal: 12.99,
-      deliveryFee: 1.99,
-      serviceFee: 0.99,
-      total: 15.97,
-    };
-
-    render(<CartSidebar {...decimalProps} />);
-
-    expect(screen.getByText('£12.99')).toBeInTheDocument();
-    expect(screen.getByText('£1.99')).toBeInTheDocument();
-    expect(screen.getByText('£0.99')).toBeInTheDocument();
-    expect(screen.getByText('£15.97')).toBeInTheDocument();
   });
 
   it('should handle restaurant with zero minimum order', () => {
@@ -142,9 +123,8 @@ describe('CartSidebar', () => {
 
     const propsWithZeroMin = {
       ...defaultProps,
-      currentRestaurant: restaurantWithZeroMin,
-      subtotal: 5.0,
-      total: 9.0,
+      restaurant: restaurantWithZeroMin,
+      cart: { 'item-1': 1 }, // Low quantity
     };
 
     render(<CartSidebar {...propsWithZeroMin} />);

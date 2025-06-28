@@ -1,4 +1,4 @@
-import { CartState, MenuItem } from '@dreckly/types';
+import { CartState, MenuItem, CartItem } from '@dreckly/types';
 
 export const getCartItems = (get: () => CartState) => {
   return () => {
@@ -10,8 +10,8 @@ export const getCartItems = (get: () => CartState) => {
         const item = currentRestaurant.menu
           ?.flatMap((category) => category.items)
           .find((menuItem: MenuItem) => menuItem.id === itemId);
-        return item ? { item, quantity } : null;
+        return item ? { ...item, quantity } : null;
       })
-      .filter((cartItem) => cartItem !== null);
+      .filter((cartItem): cartItem is CartItem => cartItem !== null);
   };
 };

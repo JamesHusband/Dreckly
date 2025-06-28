@@ -1,7 +1,7 @@
-import { calculateSubtotal } from './calculateSubtotal';
+import { sumCartItems } from './sumCartItems';
 import { CartItem } from '@dreckly/types';
 
-describe('calculateSubtotal', () => {
+describe('sumCartItems', () => {
   it('should calculate subtotal correctly', () => {
     const cartItemsList: CartItem[] = [
       {
@@ -22,13 +22,13 @@ describe('calculateSubtotal', () => {
       },
     ];
 
-    const result = calculateSubtotal(cartItemsList);
+    const result = sumCartItems(cartItemsList);
 
     expect(result).toBe(5.99 * 2 + 12.99);
   });
 
   it('should return 0 for empty list', () => {
-    const result = calculateSubtotal([]);
+    const result = sumCartItems([]);
     expect(result).toBe(0);
   });
 
@@ -52,7 +52,7 @@ describe('calculateSubtotal', () => {
       },
     ];
 
-    const result = calculateSubtotal(cartItemsList);
+    const result = sumCartItems(cartItemsList);
 
     expect(result).toBe(12.99);
   });
@@ -69,7 +69,7 @@ describe('calculateSubtotal', () => {
       },
     ];
 
-    const result = calculateSubtotal(cartItemsList);
+    const result = sumCartItems(cartItemsList);
 
     expect(result).toBe(5.99 * 10);
   });
@@ -94,7 +94,7 @@ describe('calculateSubtotal', () => {
       },
     ];
 
-    const result = calculateSubtotal(cartItemsList);
+    const result = sumCartItems(cartItemsList);
 
     expect(result).toBe(5.99 * 3 + 3.99 * 2);
   });

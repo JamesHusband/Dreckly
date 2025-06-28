@@ -13,7 +13,7 @@ const mockMenuItem2: MenuItem = {
   id: 'item-2',
   name: 'Pasta Carbonara',
   description: 'Creamy pasta with bacon',
-  price: 14.99,
+  price: 10.99,
   image: '/pasta.jpg',
 };
 
@@ -22,8 +22,8 @@ const mockRestaurant: Restaurant = {
   name: 'Test Restaurant',
   cuisine: 'Italian',
   rating: 4.5,
-  deliveryTime: '25-40 minutes',
-  deliveryFee: 2.5,
+  deliveryTime: '30-45 min',
+  deliveryFee: 2.99,
   minimumOrder: 10,
   image: '/test.jpg',
   featured: true,
@@ -66,11 +66,11 @@ describe('getCartItems', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      item: mockMenuItem1,
+      ...mockMenuItem1,
       quantity: 2,
     });
     expect(result[1]).toEqual({
-      item: mockMenuItem2,
+      ...mockMenuItem2,
       quantity: 1,
     });
     expect(mockGet).toHaveBeenCalledTimes(1);
@@ -88,11 +88,11 @@ describe('getCartItems', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      item: mockMenuItem1,
+      ...mockMenuItem1,
       quantity: 2,
     });
     expect(result[1]).toEqual({
-      item: mockMenuItem2,
+      ...mockMenuItem2,
       quantity: 1,
     });
     expect(mockGet).toHaveBeenCalledTimes(1);
@@ -138,11 +138,11 @@ describe('getCartItems', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      item: mockMenuItem1,
+      ...mockMenuItem1,
       quantity: 0,
     });
     expect(result[1]).toEqual({
-      item: mockMenuItem2,
+      ...mockMenuItem2,
       quantity: 1,
     });
     expect(mockGet).toHaveBeenCalledTimes(1);
@@ -160,11 +160,11 @@ describe('getCartItems', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      item: mockMenuItem1,
+      ...mockMenuItem1,
       quantity: -1,
     });
     expect(result[1]).toEqual({
-      item: mockMenuItem2,
+      ...mockMenuItem2,
       quantity: 1,
     });
     expect(mockGet).toHaveBeenCalledTimes(1);
@@ -182,7 +182,7 @@ describe('getCartItems', () => {
 
     expect(result).toHaveLength(1);
     expect(result[0]).toEqual({
-      item: mockMenuItem1,
+      ...mockMenuItem1,
       quantity: 999,
     });
     expect(mockGet).toHaveBeenCalledTimes(1);
@@ -198,7 +198,8 @@ describe('getCartItems', () => {
 
     const result = getCartItemsAction();
 
-    expect(result[0].item).toBe(mockMenuItem1);
+    expect(result[0].id).toBe(mockMenuItem1.id);
+    expect(result[0].name).toBe(mockMenuItem1.name);
     expect(mockGet).toHaveBeenCalledTimes(1);
   });
 
@@ -214,11 +215,11 @@ describe('getCartItems', () => {
 
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
-      item: mockMenuItem1,
+      ...mockMenuItem1,
       quantity: 2,
     });
     expect(result[1]).toEqual({
-      item: mockMenuItem2,
+      ...mockMenuItem2,
       quantity: 3,
     });
     expect(mockGet).toHaveBeenCalledTimes(1);
