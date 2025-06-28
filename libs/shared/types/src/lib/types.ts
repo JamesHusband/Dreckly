@@ -1,5 +1,8 @@
 import * as React from 'react';
 
+// =====================
+// Base/Primitive Types
+// =====================
 export interface Cuisine {
   name: string;
   icon:
@@ -27,6 +30,13 @@ export interface MenuCategory {
   items: MenuItem[];
 }
 
+export interface Cart {
+  [itemId: string]: number;
+}
+
+// =====================
+// Restaurant Types
+// =====================
 export interface Restaurant {
   id: number;
   name: string;
@@ -56,10 +66,13 @@ export interface RestaurantMetaProps {
   variant?: 'card' | 'header';
 }
 
-export interface Cart {
-  [itemId: string]: number;
+export interface RestaurantMenuProps {
+  restaurant: Restaurant;
 }
 
+// =====================
+// Menu/Cart Item Types
+// =====================
 export interface MenuItemProps {
   name: string;
   items: MenuItem[];
@@ -67,6 +80,55 @@ export interface MenuItemProps {
   menu: MenuCategory[];
 }
 
+export interface CartItemWithDetails extends MenuItem {
+  quantity: number;
+}
+
+export interface MenuCategoryProps {
+  category: MenuCategory;
+  cart: Cart;
+  onAddToCart: (itemId: string) => void;
+  onRemoveFromCart: (itemId: string) => void;
+  isLast?: boolean;
+  restaurantName: string;
+}
+
+export interface MenuCartItemProps {
+  item: MenuItem;
+  quantity: number;
+  onAdd: (itemId: string) => void;
+  onRemove: (itemId: string) => void;
+}
+
+export interface MenuCartSidebarProps {
+  restaurant: Restaurant;
+  cart: Cart;
+  onAddToCart: (itemId: string) => void;
+  onRemoveFromCart: (itemId: string) => void;
+}
+
+export interface CartSidebarProps {
+  subtotal: number;
+  deliveryFee: number;
+  serviceFee: number;
+  total: number;
+  currentRestaurant: Restaurant;
+}
+
+export interface CartCountProps {
+  className?: string;
+}
+
+export interface ItemCounterProps {
+  id: string;
+  onAdd?: (itemId: string) => void;
+  onRemove?: (itemId: string) => void;
+  quantity?: number;
+}
+
+// =====================
+// Cart/Order State & Actions
+// =====================
 export type CartState = {
   cart: Record<string, number>;
   currentRestaurant: Restaurant | null;
@@ -83,6 +145,12 @@ export interface CartActions {
   getCartItems: () => Array<{ item: MenuItem; quantity: number }>;
   startNewOrder: (restaurant: Restaurant, itemId?: string) => void;
 }
+
+export interface RestaurantActions {
+  setCurrentRestaurant: (restaurant: Restaurant) => void;
+}
+
+export type CartStore = CartState & CartActions & RestaurantActions;
 
 export interface ComputedCartState {
   cart: Record<string, number>;
@@ -108,21 +176,10 @@ export interface UseCartReturn {
   totalItems: number;
 }
 
-export interface RestaurantActions {
-  setCurrentRestaurant: (restaurant: Restaurant) => void;
-}
-
-export type CartStore = CartState & CartActions & RestaurantActions;
-
-// Context Types
-export interface CuisineContextType {
-  selectedCuisine: string | null;
-  setSelectedCuisine: (cuisine: string | null) => void;
-}
-
-// Cart Utility Types
-export interface CartItemWithDetails extends MenuItem {
-  quantity: number;
+export interface CartCalculationParams {
+  cart: Cart;
+  restaurant: Restaurant;
+  serviceFee?: number;
 }
 
 export interface CartCalculationResult {
@@ -136,51 +193,22 @@ export interface CartCalculationResult {
   totalItems: number;
 }
 
-export interface CartCalculationParams {
-  cart: Cart;
-  restaurant: Restaurant;
-  serviceFee?: number;
-}
-
-// Modal Types
 export interface PendingAction {
   itemId: string;
   restaurant: Restaurant;
 }
 
-// Cart Component Props
-export interface CartCountProps {
-  className?: string;
+// =====================
+// Context Types
+// =====================
+export interface CuisineContextType {
+  selectedCuisine: string | null;
+  setSelectedCuisine: (cuisine: string | null) => void;
 }
 
-export interface CartSidebarProps {
-  subtotal: number;
-  deliveryFee: number;
-  serviceFee: number;
-  total: number;
-  currentRestaurant: Restaurant;
-}
-
-export interface MenuCartItemProps {
-  item: MenuItem;
-  quantity: number;
-  onAdd: (itemId: string) => void;
-  onRemove: (itemId: string) => void;
-}
-
-export interface MenuCartSidebarProps {
-  restaurant: Restaurant;
-  cart: Cart;
-  onAddToCart: (itemId: string) => void;
-  onRemoveFromCart: (itemId: string) => void;
-}
-
-// Menu Component Props
-export interface RestaurantMenuProps {
-  restaurant: Restaurant;
-}
-
-// UI Kit Component Props
+// =====================
+// UI Kit/Component Props
+// =====================
 export interface ConfirmationModalProps {
   isOpen: boolean;
   onConfirm: () => void;
@@ -222,15 +250,6 @@ export interface NavButtonProps {
   text?: string;
 }
 
-export interface MenuCategoryProps {
-  category: MenuCategory;
-  cart: Cart;
-  onAddToCart: (itemId: string) => void;
-  onRemoveFromCart: (itemId: string) => void;
-  isLast?: boolean;
-  restaurantName: string;
-}
-
 export interface IconButtonProps {
   icon: React.ReactNode;
   variant?: 'primary' | 'outline';
@@ -238,11 +257,4 @@ export interface IconButtonProps {
   onClick?: () => void;
   'aria-label': string;
   disabled?: boolean;
-}
-
-export interface ItemCounterProps {
-  id: string;
-  onAdd?: (itemId: string) => void;
-  onRemove?: (itemId: string) => void;
-  quantity?: number;
 }
