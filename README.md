@@ -73,24 +73,14 @@ Built with [Nx](https://nx.dev) for a scalable, full-stack monorepo experience.
 - `npx nx lint` - Run linting
 - `npx nx e2e @dreckly/dreckly-e2e` - Run end-to-end tests
 
-### Project Structure
+## Makefile Usage
 
+This project provides a `Makefile` in the root directory to help automate common development tasks. To see all available commands, run:
+
+```sh
+make help
 ```
-drecktly/
-├── apps/
-│   ├── dreckly/          # Main Next.js application
-│   └── dreckly-e2e/      # End-to-end tests
-├── libs/
-│   ├── feature/          # Feature libraries
-│   │   ├── cart/         # Shopping cart functionality
-│   │   ├── home/         # Home page components
-│   │   ├── layout/       # Layout components
-│   │   ├── menu/         # Menu components
-│   │   └── restaurants/  # Restaurant components
-│   ├── ui-kit/           # Reusable UI components
-│   ├── state/            # State management
-│   ├── types/            # TypeScript type definitions
-│   └── utils/            # Utility functions
-```
+
+This will display a list of available make commands and their descriptions.
 
 ---
