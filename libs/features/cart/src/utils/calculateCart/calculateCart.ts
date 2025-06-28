@@ -1,18 +1,16 @@
-import { Restaurant, Cart } from '@dreckly/types';
+import { Restaurant, Cart, ComputedCartState } from '@dreckly/types';
 import { getCartStats } from '@dreckly/utils';
 import { CartItemWithDetails } from '../createCartItemsList';
 import { createCartItemsList } from '../createCartItemsList';
 import { calculateSubtotal } from '../calculateSubtotal';
 
-export interface CartCalculationResult {
+export interface CartCalculationResult extends ComputedCartState {
   cartItemsList: CartItemWithDetails[];
   subtotal: number;
   deliveryFee: number;
   serviceFee: number;
   total: number;
   hasCartItems: boolean;
-  itemCount: number;
-  totalItems: number;
 }
 
 export interface CartCalculationParams {
@@ -38,8 +36,6 @@ export const calculateCart = ({
     currentRestaurant: restaurant,
   });
   const hasCartItems = computedState.itemCount > 0;
-  const itemCount = computedState.itemCount;
-  const totalItems = computedState.totalItems;
 
   return {
     cartItemsList,
@@ -48,7 +44,6 @@ export const calculateCart = ({
     serviceFee,
     total,
     hasCartItems,
-    itemCount,
-    totalItems,
+    ...computedState,
   };
 };

@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { CartStore, CartBaseState } from './types';
-import * as cartActions from './actions/cart';
-import * as restaurantActions from './actions/restaurant';
+import { CartStore, CartBaseState } from '../../types';
+import * as cartActions from '../../actions/cart';
+import * as restaurantActions from '../../actions/restaurant';
 
 const initialState: CartBaseState = {
   cart: {},

@@ -77,9 +77,26 @@ export type CartState = {
 };
 
 /**
+ * Base cart actions interface that can be extended
+ */
+export interface CartActions {
+  itemCount: () => number;
+  totalItems: () => number;
+  addToCart: (itemId: string, restaurant?: Restaurant) => void;
+  removeFromCart: (itemId: string) => void;
+  clearCart: () => void;
+  setItemQuantity: (itemId: string, quantity: number) => void;
+  getItemQuantity: (itemId: string) => number;
+  getCartItems: () => Array<{ item: MenuItem; quantity: number }>;
+  startNewOrder: (restaurant: Restaurant, itemId?: string) => void;
+}
+
+/**
  * Computed cart state with derived properties
  */
-export interface ComputedCartState extends CartState {
+export interface ComputedCartState {
+  cart: Record<string, number>;
+  currentRestaurant: Restaurant | null;
   itemCount: number;
   totalItems: number;
 }

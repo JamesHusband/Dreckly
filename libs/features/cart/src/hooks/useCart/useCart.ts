@@ -23,13 +23,14 @@ export const useCart = (): {
         removeFromCart: store.removeFromCart,
         clearCart: store.clearCart,
         setItemQuantity: store.setItemQuantity,
-        getCartQuantity: store.getItemQuantity,
+        getItemQuantity: store.getItemQuantity,
+        getCartItems: store.getCartItems,
+        startNewOrder: (restaurant: Restaurant, itemId?: string) =>
+          store.startNewOrder(restaurant, itemId),
         itemCount: store.itemCount(),
         totalItems: store.totalItems(),
         currentRestaurant: store.currentRestaurant,
         setCurrentRestaurant: store.setCurrentRestaurant,
-        startNewOrder: (restaurant: Restaurant, itemId?: string) =>
-          store.startNewOrder(restaurant, itemId),
       }
     : null;
 
