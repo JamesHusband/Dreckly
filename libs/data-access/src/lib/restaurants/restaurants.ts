@@ -11,19 +11,15 @@ export async function getRestaurant(id: string): Promise<Restaurant> {
 }
 
 export async function getRestaurants(): Promise<Restaurant[]> {
-  // Mock data - in a real app this would come from a database
   return [
     {
       id: 1,
       name: 'The Cornish Pasty Co.',
-      cuisine: 'Traditional Cornish',
+      cuisine: 'Cornish',
       rating: 4.8,
       deliveryTime: '25-40 min',
       deliveryFee: 2.99,
       minimumOrder: 8.0,
-      image: '/images/restaurant/cornish-pasty-co/logo/cornish-pasty-co.webp',
-      coverImage:
-        '/images/restaurant/cornish-pasty-co/cover/cornish-pasty-co.webp',
       featured: true,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -35,11 +31,9 @@ export async function getRestaurants(): Promise<Restaurant[]> {
           items: [
             {
               id: '1',
-              name: 'Classic Cornish Pasty',
+              name: 'Traditional Pasty',
               description: 'Traditional beef, potato, swede and onion pasty',
               price: 4.5,
-              image:
-                '/images/restaurant/cornish-pasty-co/menu/traditional_pasty.png',
             },
             {
               id: '2',
@@ -47,15 +41,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               description:
                 'Vegetarian pasty with mature cheddar and caramelized onions',
               price: 4.25,
-              image:
-                '/images/restaurant/cornish-pasty-co/menu/cheese_and_onion_pasty.png',
             },
             {
               id: '3',
               name: 'Steak Pasty',
               description: 'Premium steak and kidney with rich gravy',
               price: 5.25,
-              image: '/images/restaurant/cornish-pasty-co/menu/steak_pasty.png',
             },
           ],
         },
@@ -67,15 +58,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Chicken & Mushroom Pasty',
               description: 'Free-range chicken with wild mushrooms and herbs',
               price: 4.75,
-              image:
-                '/images/restaurant/cornish-pasty-co/menu/chicken_and_mushroom_pasty.png',
             },
             {
               id: '5',
               name: 'Fish Pasty',
               description: 'Fresh Cornish fish with parsley sauce',
               price: 5.5,
-              image: '/images/restaurant/cornish-pasty-co/menu/fish_pasty.png',
             },
           ],
         },
@@ -87,16 +75,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Cornish Yarg Cheese',
               description: 'Local artisan cheese portion',
               price: 3.25,
-              image:
-                '/images/restaurant/cornish-pasty-co/menu/cornish_yarg_cheese.png',
             },
             {
               id: '7',
               name: 'Cornish Cider',
               description: 'Traditional scrumpy cider 500ml',
               price: 4.5,
-              image:
-                '/images/restaurant/cornish-pasty-co/menu/cornish_cider.png',
               ageRestricted: true,
             },
           ],
@@ -111,9 +95,6 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       deliveryTime: '30-45 min',
       deliveryFee: 3.49,
       minimumOrder: 12.0,
-      image: '/images/restaurant/fishermans-catch/logo/fishermans-catch.webp',
-      coverImage:
-        '/images/restaurant/fishermans-catch/cover/fishermans-catch.webp',
       featured: true,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -125,27 +106,21 @@ export async function getRestaurants(): Promise<Restaurant[]> {
           items: [
             {
               id: '8',
-              name: 'Classic Fish & Chips',
+              name: 'Fish & Chips',
               description: 'Fresh cod in crispy batter with chunky chips',
               price: 8.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '9',
               name: 'Haddock & Chips',
               description: 'Premium haddock with golden chips and mushy peas',
               price: 9.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '10',
               name: 'Plaice & Chips',
               description: 'Fresh plaice with triple-cooked chips',
               price: 7.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -157,16 +132,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Mushy Peas',
               description: 'Traditional mushy peas',
               price: 1.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '12',
               name: 'Curry Sauce',
               description: 'Spicy curry sauce for dipping',
               price: 1.0,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -180,10 +151,6 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       deliveryTime: '35-50 min',
       deliveryFee: 2.49,
       minimumOrder: 15.0,
-      image:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
-      coverImage:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -198,16 +165,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Cornish Crab Cakes',
               description: 'Fresh crab cakes with lemon aioli',
               price: 6.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '14',
               name: 'Soup of the Day',
               description: "Chef's daily soup with crusty bread",
               price: 4.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -216,19 +179,15 @@ export async function getRestaurants(): Promise<Restaurant[]> {
           items: [
             {
               id: '15',
-              name: 'Cornish Lamb Shank',
+              name: 'Lamb Shank',
               description: 'Slow-cooked lamb with rosemary potatoes',
               price: 16.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '16',
               name: 'Seafood Risotto',
               description: 'Creamy risotto with local seafood',
               price: 14.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -242,10 +201,6 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       deliveryTime: '20-35 min',
       deliveryFee: 2.99,
       minimumOrder: 10.0,
-      image:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
-      coverImage:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -260,24 +215,18 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Chicken Tikka Masala',
               description: 'Creamy curry with tender chicken',
               price: 11.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '18',
               name: 'Lamb Rogan Josh',
               description: 'Spicy lamb curry with aromatic spices',
               price: 12.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '19',
               name: 'Vegetable Korma',
               description: 'Mild curry with mixed vegetables',
               price: 9.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -289,16 +238,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Garlic Naan',
               description: 'Fresh garlic naan bread',
               price: 2.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '21',
               name: 'Pilau Rice',
               description: 'Fragrant basmati rice with spices',
               price: 3.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -312,10 +257,6 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       deliveryTime: '25-40 min',
       deliveryFee: 3.99,
       minimumOrder: 12.0,
-      image:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
-      coverImage:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -330,16 +271,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Margherita',
               description: 'Classic tomato, mozzarella and basil',
               price: 10.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '23',
               name: 'Pepperoni',
               description: 'Spicy pepperoni with mozzarella',
               price: 12.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '24',
@@ -347,8 +284,6 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               description:
                 'Four seasons with artichoke, ham, mushrooms, olives',
               price: 14.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -360,16 +295,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Spaghetti Carbonara',
               description: 'Creamy pasta with pancetta and egg',
               price: 9.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '26',
               name: 'Penne Arrabbiata',
               description: 'Spicy tomato sauce with chilli',
               price: 8.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -383,10 +314,6 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       deliveryTime: '15-30 min',
       deliveryFee: 1.99,
       minimumOrder: 5.0,
-      image:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
-      coverImage:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -401,24 +328,18 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Cornish Vanilla',
               description: 'Rich vanilla ice cream with clotted cream',
               price: 3.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '28',
               name: 'Strawberry Ripple',
               description: 'Fresh strawberry ice cream with ripple',
               price: 3.75,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '29',
               name: 'Chocolate Fudge',
               description: 'Decadent chocolate with fudge pieces',
               price: 4.0,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
@@ -430,16 +351,12 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               name: 'Cornish Saffron Cake',
               description: 'Traditional saffron cake with currants',
               price: 4.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
             {
               id: '31',
               name: 'Cream Tea',
               description: 'Scones with clotted cream and jam',
               price: 5.99,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
             },
           ],
         },
