@@ -2,14 +2,7 @@ import Link from 'next/link';
 import { formatPrice } from '@dreckly/utils';
 import { calculateCart } from '@dreckly/cart';
 import { MenuCartItem } from '../MenuCartItem';
-import { Restaurant, Cart } from '@dreckly/types';
-
-interface MenuCartSidebarProps {
-  restaurant: Restaurant;
-  cart: Cart;
-  onAddToCart: (itemId: string) => void;
-  onRemoveFromCart: (itemId: string) => void;
-}
+import { Restaurant, Cart, MenuCartSidebarProps } from '@dreckly/types';
 
 export const MenuCartSidebar = ({
   restaurant,

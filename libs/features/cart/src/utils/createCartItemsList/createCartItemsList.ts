@@ -1,8 +1,4 @@
-import { MenuItem, Restaurant } from '@dreckly/types';
-
-export interface CartItemWithDetails extends MenuItem {
-  quantity: number;
-}
+import { MenuItem, Restaurant, CartItemWithDetails } from '@dreckly/types';
 
 export const createCartItemsList = (
   cart: Record<string, number>,

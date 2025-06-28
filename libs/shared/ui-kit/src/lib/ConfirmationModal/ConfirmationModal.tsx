@@ -1,14 +1,5 @@
 import React from 'react';
-
-interface ConfirmationModalProps {
-  isOpen: boolean;
-  onConfirm: () => void;
-  onCancel: () => void;
-  title: string;
-  message: string;
-  confirmText?: string;
-  cancelText?: string;
-}
+import { ConfirmationModalProps } from '@dreckly/types';
 
 export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
   isOpen,

@@ -3,13 +3,7 @@
 import { Minus, Plus } from 'lucide-react';
 import { useCart } from '@dreckly/cart';
 import { IconButton } from '../IconButton';
-
-interface ItemCounterProps {
-  id: string;
-  onAdd?: (itemId: string) => void;
-  onRemove?: (itemId: string) => void;
-  quantity?: number;
-}
+import { ItemCounterProps } from '@dreckly/types';
 
 export const ItemCounter = ({
   id,

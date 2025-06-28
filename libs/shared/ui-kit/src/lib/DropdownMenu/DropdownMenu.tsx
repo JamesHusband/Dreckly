@@ -1,16 +1,5 @@
 import Link from 'next/link';
-
-interface DropdownMenuItem {
-  href: string;
-  label: string;
-}
-
-interface DropdownMenuProps {
-  isOpen: boolean;
-  items: DropdownMenuItem[];
-  onItemClick?: () => void;
-  className?: string;
-}
+import { DropdownMenuItem, DropdownMenuProps } from '@dreckly/types';
 
 export const DropdownMenu = ({
   isOpen,

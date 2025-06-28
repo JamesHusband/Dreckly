@@ -1,13 +1,5 @@
 import { ReactNode } from 'react';
-
-interface IconButtonProps {
-  icon: ReactNode;
-  variant?: 'primary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
-  onClick?: () => void;
-  'aria-label': string;
-  disabled?: boolean;
-}
+import { IconButtonProps } from '@dreckly/types';
 
 export const IconButton = ({
   icon,

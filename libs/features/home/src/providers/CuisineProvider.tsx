@@ -1,10 +1,7 @@
 'use client';
 
 import React, { useState, createContext } from 'react';
-interface CuisineContextType {
-  selectedCuisine: string | null;
-  setSelectedCuisine: (cuisine: string | null) => void;
-}
+import { CuisineContextType } from '@dreckly/types';
 
 export const CuisineContext = createContext<CuisineContextType | undefined>(
   undefined

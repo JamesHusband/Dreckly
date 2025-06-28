@@ -1,8 +1,5 @@
 import Link from 'next/link';
-
-interface LogoProps {
-  textColor?: 'grey' | 'white';
-}
+import { LogoProps } from '@dreckly/types';
 
 export const Logo = ({ textColor = 'grey' }: LogoProps) => {
   const textColorClass = textColor === 'white' ? 'text-white' : 'text-gray-900';

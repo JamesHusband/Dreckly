@@ -3,16 +3,7 @@
 import Image from 'next/image';
 import { Plus, Minus } from 'lucide-react';
 import { formatPrice, getImage } from '@dreckly/utils';
-import { MenuCategory as MenuCategoryType, Cart } from '@dreckly/types';
-
-interface MenuCategoryProps {
-  category: MenuCategoryType;
-  cart: Cart;
-  onAddToCart: (itemId: string) => void;
-  onRemoveFromCart: (itemId: string) => void;
-  isLast?: boolean;
-  restaurantName: string;
-}
+import { MenuCategoryProps } from '@dreckly/types';
 
 export const MenuCategory = ({
   category,

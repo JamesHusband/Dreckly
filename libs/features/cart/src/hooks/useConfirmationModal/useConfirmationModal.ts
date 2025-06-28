@@ -1,12 +1,7 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Restaurant } from '@dreckly/types';
-
-export interface PendingAction {
-  itemId: string;
-  restaurant: Restaurant;
-}
+import { Restaurant, PendingAction } from '@dreckly/types';
 
 export const useConfirmationModal = () => {
   const [isOpen, setIsOpen] = useState(false);

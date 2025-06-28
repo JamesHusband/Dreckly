@@ -2,14 +2,7 @@
 
 import { Plus, Minus } from 'lucide-react';
 import { formatPrice } from '@dreckly/utils';
-import { MenuItem } from '@dreckly/types';
-
-interface MenuCartItemProps {
-  item: MenuItem;
-  quantity: number;
-  onAdd: (itemId: string) => void;
-  onRemove: (itemId: string) => void;
-}
+import { MenuItem, MenuCartItemProps } from '@dreckly/types';
 
 export const MenuCartItem = ({
   item,

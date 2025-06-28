@@ -1,12 +1,9 @@
 'use client';
 
 import { useCartCount } from '@dreckly/cart';
+import { CartCountProps } from '@dreckly/types';
 
 // import { useCartCount } from '../../hooks/useCartCount';
-
-interface CartCountProps {
-  className?: string;
-}
 
 export const CartCount = ({ className = '' }: CartCountProps) => {
   const { count, isVisible, isLoading } = useCartCount();
