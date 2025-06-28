@@ -3,11 +3,9 @@ import { MenuItem, Restaurant } from '@dreckly/types';
 export type CartBaseState = {
   cart: Record<string, number>;
   currentRestaurant: Restaurant | null;
-  menuItems: MenuItem[];
 };
 
 export interface CartActions {
-  hasItems: () => boolean;
   itemCount: () => number;
   totalItems: () => number;
   addToCart: (itemId: string, restaurant?: Restaurant) => void;
@@ -21,7 +19,6 @@ export interface CartActions {
 
 export interface RestaurantActions {
   setCurrentRestaurant: (restaurant: Restaurant) => void;
-  setMenuItems: (items: MenuItem[]) => void;
 }
 
 export type CartStore = CartBaseState & CartActions & RestaurantActions;

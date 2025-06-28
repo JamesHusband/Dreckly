@@ -23,11 +23,9 @@ export const useCart = (): {
         clearCart: store.clearCart,
         setItemQuantity: store.setItemQuantity,
         getCartQuantity: store.getItemQuantity,
-        hasItems: store.hasItems(),
         itemCount: store.itemCount(),
         totalItems: store.totalItems(),
         currentRestaurant: store.currentRestaurant,
-        menuItems: store.menuItems,
         setCurrentRestaurant: store.setCurrentRestaurant,
         startNewOrder: store.startNewOrder,
       }

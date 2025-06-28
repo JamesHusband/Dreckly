@@ -1,4 +1,5 @@
 import { Restaurant, Cart } from '@dreckly/types';
+import { getCartStats } from '@dreckly/utils';
 import { CartItemWithDetails } from '../createCartItemsList';
 import { createCartItemsList } from '../createCartItemsList';
 import { calculateSubtotal } from '../calculateSubtotal';
@@ -25,21 +26,20 @@ export const calculateCart = ({
   restaurant,
   serviceFee = 1.49,
 }: CartCalculationParams): CartCalculationResult => {
-  const menuItems = (restaurant.menu ?? []).flatMap(
-    (category) => category.items
-  );
-
-  const cartItemsList = createCartItemsList(cart, menuItems);
+  const cartItemsList = createCartItemsList(cart, restaurant);
 
   const subtotal = calculateSubtotal(cartItemsList);
   const deliveryFee = restaurant.deliveryFee || 0;
   const total = subtotal + deliveryFee + serviceFee;
-  const hasCartItems = cartItemsList.length > 0;
-  const itemCount = Object.keys(cart).length;
-  const totalItems = Object.values(cart).reduce(
-    (sum, quantity) => sum + quantity,
-    0
-  );
+
+  // Use shared computation logic
+  const computedState = getCartStats({
+    cart,
+    currentRestaurant: restaurant,
+  });
+  const hasCartItems = computedState.itemCount > 0;
+  const itemCount = computedState.itemCount;
+  const totalItems = computedState.totalItems;
 
   return {
     cartItemsList,

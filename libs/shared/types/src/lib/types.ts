@@ -74,5 +74,12 @@ export interface MenuItemProps {
 export type CartState = {
   cart: Record<string, number>;
   currentRestaurant: Restaurant | null;
-  menuItems: MenuItem[];
 };
+
+/**
+ * Computed cart state with derived properties
+ */
+export interface ComputedCartState extends CartState {
+  itemCount: number;
+  totalItems: number;
+}

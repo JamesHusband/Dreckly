@@ -18,7 +18,6 @@ export const useCartActions = () => {
         itemId,
         restaurantId: restaurant.id,
         currentRestaurantId: cart.currentRestaurant?.id,
-        hasItems: cart.hasItems,
         cartItems: Object.keys(cart.cart).length,
       });
 
@@ -26,12 +25,12 @@ export const useCartActions = () => {
       if (
         cart.currentRestaurant &&
         cart.currentRestaurant.id !== restaurant.id &&
-        cart.hasItems
+        cart.itemCount > 0
       ) {
         console.log('Showing confirmation modal because:', {
           hasCurrentRestaurant: !!cart.currentRestaurant,
           differentRestaurant: cart.currentRestaurant.id !== restaurant.id,
-          hasItems: cart.hasItems,
+          hasItems: cart.itemCount > 0,
         });
         showConfirmation(itemId, restaurant);
         return false;

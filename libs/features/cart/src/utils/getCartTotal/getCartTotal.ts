@@ -11,7 +11,7 @@ export const getCartTotal = ({
   restaurant: Restaurant;
 }): number => {
   let total = 0;
-  restaurant.menu.forEach((category) => {
+  restaurant.menu?.forEach((category) => {
     category.items.forEach((item) => {
       total += (cart[item.id] || 0) * item.price;
     });

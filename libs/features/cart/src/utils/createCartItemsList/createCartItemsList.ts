@@ -1,19 +1,19 @@
-import { MenuItem } from '@dreckly/types';
+import { MenuItem, Restaurant } from '@dreckly/types';
 
 export interface CartItemWithDetails extends MenuItem {
   quantity: number;
 }
 
-/**
- * Creates a list of cart items with full details
- */
 export const createCartItemsList = (
   cart: Record<string, number>,
-  menuItems: MenuItem[]
+  restaurant: Restaurant
 ): CartItemWithDetails[] => {
   return Object.entries(cart)
     .map(([itemId, quantity]) => {
-      const item = menuItems.find((menuItem) => menuItem.id === itemId);
+      // Search through all categories to find the item
+      const item = restaurant.menu
+        ?.flatMap((category) => category.items)
+        .find((menuItem) => menuItem.id === itemId);
       return item ? { ...item, quantity } : null;
     })
     .filter((item): item is CartItemWithDetails => item !== null);

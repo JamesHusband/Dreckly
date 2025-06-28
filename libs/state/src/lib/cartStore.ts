@@ -1,6 +1,5 @@
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
-import { MenuItem } from '@dreckly/types';
 import { CartStore, CartBaseState } from './types';
 import * as cartActions from './actions/cart';
 import * as restaurantActions from './actions/restaurant';
@@ -8,7 +7,6 @@ import * as restaurantActions from './actions/restaurant';
 const initialState: CartBaseState = {
   cart: {},
   currentRestaurant: null,
-  menuItems: [] as MenuItem[],
 };
 
 const createCartStore = () =>
@@ -18,8 +16,7 @@ const createCartStore = () =>
         (set, get) => ({
           ...initialState,
           // Cart actions
-          hasItems: () => cartActions.hasItems(get),
-          itemCount: () => cartActions.itemCount(get),
+          itemCount: () => cartActions.itemCount(get)(),
           totalItems: () => cartActions.totalItems(get),
           addToCart: cartActions.addToCart(set),
           removeFromCart: cartActions.removeFromCart(set),
@@ -30,7 +27,6 @@ const createCartStore = () =>
           startNewOrder: cartActions.startNewOrder(set),
           // Restaurant actions
           setCurrentRestaurant: restaurantActions.setCurrentRestaurant(set),
-          setMenuItems: restaurantActions.setMenuItems(set),
         }),
         {
           name: 'cart-storage',

@@ -13,34 +13,20 @@ export const addToCart = (
         state.currentRestaurant &&
         state.currentRestaurant.id !== restaurant.id
       ) {
-        const newMenuItems = (restaurant.menu ?? []).flatMap(
-          (category) => category.items
-        );
-
         return {
           ...state,
           cart: { [itemId]: 1 },
           currentRestaurant: restaurant,
-          menuItems: newMenuItems,
         };
       }
 
       if (Object.keys(state.cart).length > 0 && !state.currentRestaurant) {
-        const newMenuItems = (restaurant.menu ?? []).flatMap(
-          (category) => category.items
-        );
-
         return {
           ...state,
           cart: { [itemId]: 1 },
           currentRestaurant: restaurant,
-          menuItems: newMenuItems,
         };
       }
-
-      const newMenuItems = (restaurant.menu ?? []).flatMap(
-        (category) => category.items
-      );
 
       return {
         ...state,
@@ -49,7 +35,6 @@ export const addToCart = (
           [itemId]: (state.cart[itemId] || 0) + 1,
         },
         currentRestaurant: restaurant,
-        menuItems: newMenuItems,
       };
     });
   };

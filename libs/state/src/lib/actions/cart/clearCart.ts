@@ -1,14 +1,10 @@
 import { CartState } from '@dreckly/types';
 
-export const clearCart = (
-  set: (fn: (state: CartState) => CartState) => void
-) => {
+export const clearCart = (set: any) => {
   return () => {
     set((state: CartState) => ({
       ...state,
       cart: {},
-      currentRestaurant: null,
-      menuItems: [],
     }));
   };
 };
