@@ -4,3 +4,4 @@ export * from './lib/menu-types';
 export * from './lib/cart-types';
 export * from './lib/ui-types';
 export * from './lib/context-types';
+export * from './lib/user-types';
