@@ -11,6 +11,7 @@ export const Header = () => {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   const userMenuItems = [
+    { href: '/user', label: 'My Account' },
     { href: '/login', label: 'Sign In' },
     { href: '/register', label: 'Create Account' },
   ];

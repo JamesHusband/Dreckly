@@ -3,3 +3,8 @@ export * from './lib/NavButton';
 export * from './lib/Copyright';
 export * from './lib/DropdownMenu';
 export * from './lib/CartCount';
+export * from './lib/CuisineCard';
+export * from './lib/BackButton';
+export * from './lib/ConfirmationModal';
+export * from './lib/IconButton';
+export * from './lib/ItemCounter';
