@@ -1,5 +1,5 @@
 import { CartState } from '@dreckly/types';
-import { getCartStats } from '@dreckly/utils';
+import { getCartStats } from './getCartStats';
 
 export const itemCount = (get: () => CartState) => {
   return () => {

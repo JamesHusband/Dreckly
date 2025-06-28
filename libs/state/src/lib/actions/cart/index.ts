@@ -1,6 +1,7 @@
 export * from './addToCart';
 export * from './clearCart';
 export * from './getCartItems';
+export * from './getCartStats';
 export * from './getItemQuantity';
 export * from './itemCount';
 export * from './removeFromCart';

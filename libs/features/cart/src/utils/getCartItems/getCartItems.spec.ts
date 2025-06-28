@@ -1,4 +1,4 @@
-import { createCartItemsList } from './createCartItemsList';
+import { createCartItemsList } from './getCartItems';
 import { Restaurant, Cart } from '@dreckly/types';
 
 const mockRestaurant: Restaurant = {
