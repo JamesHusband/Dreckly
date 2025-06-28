@@ -1,9 +1,3 @@
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-}
-
 export interface Cuisine {
   name: string;
   icon:
@@ -76,9 +70,6 @@ export type CartState = {
   currentRestaurant: Restaurant | null;
 };
 
-/**
- * Base cart actions interface that can be extended
- */
 export interface CartActions {
   itemCount: () => number;
   totalItems: () => number;
@@ -91,9 +82,6 @@ export interface CartActions {
   startNewOrder: (restaurant: Restaurant, itemId?: string) => void;
 }
 
-/**
- * Computed cart state with derived properties
- */
 export interface ComputedCartState {
   cart: Record<string, number>;
   currentRestaurant: Restaurant | null;

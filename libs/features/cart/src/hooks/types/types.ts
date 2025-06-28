@@ -1,4 +1,4 @@
-import { Restaurant, CartActions } from '@dreckly/types';
+import { Restaurant } from '@dreckly/types';
 
 export interface UseCartReturn {
   cart: Record<string, number>;

@@ -14,7 +14,6 @@ export default function UserPage() {
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-2xl mx-auto">
-          {/* Header */}
           <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center">
@@ -29,7 +28,6 @@ export default function UserPage() {
             </div>
           </div>
 
-          {/* Profile Information */}
           <div className="bg-white rounded-lg shadow-sm p-6 mb-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Profile Information
@@ -88,7 +86,7 @@ export default function UserPage() {
                 <div className="flex justify-between items-start mb-2">
                   <div>
                     <p className="font-medium text-gray-900">
-                      Fisherman's Catch
+                      Fisherman&apos;s Catch
                     </p>
                     <p className="text-sm text-gray-600">Order #12344</p>
                   </div>
@@ -105,7 +103,6 @@ export default function UserPage() {
             </div>
           </div>
 
-          {/* Account Actions */}
           <div className="bg-white rounded-lg shadow-sm p-6">
             <h2 className="text-xl font-semibold text-gray-900 mb-4">
               Account Settings
