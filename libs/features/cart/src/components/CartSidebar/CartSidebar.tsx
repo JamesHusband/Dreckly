@@ -1,7 +1,7 @@
 import { formatPrice } from '@dreckly/utils';
 import { Clock } from 'lucide-react';
 import { CartSidebarProps } from '@dreckly/types';
-import { getCartTotals } from '../../utils/calculateCart';
+import { getCartTotals } from '../../utils/getCartTotals';
 
 export const CartSidebar = ({ restaurant, cart }: CartSidebarProps) => {
   const { subtotal, deliveryFee, serviceFee, total } = getCartTotals({

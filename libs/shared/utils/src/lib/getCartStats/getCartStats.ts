@@ -1,9 +1,16 @@
-import { CartState, ComputedCartState } from '@dreckly/types';
+import { CartState, Restaurant } from '@dreckly/types';
+
+interface CartStats {
+  cart: Record<string, number>;
+  currentRestaurant: Restaurant | null;
+  itemCount: number;
+  totalItems: number;
+}
 
 /**
  * Get cart statistics (item count and total quantity)
  */
-export const getCartStats = (state: CartState): ComputedCartState => {
+export const getCartStats = (state: CartState): CartStats => {
   return {
     ...state,
     itemCount: Object.keys(state.cart).length,
