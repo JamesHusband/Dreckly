@@ -4,7 +4,7 @@ import type React from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function RegisterPage() {
+const RegisterPage = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -237,4 +237,6 @@ export default function RegisterPage() {
       </div>
     </div>
   );
-}
+};
+
+export default RegisterPage;

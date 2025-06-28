@@ -15,7 +15,7 @@ import { formatPrice } from '@dreckly/utils';
 import { ItemCounter, BackButton } from '@dreckly/ui-kit';
 import { calculateCart } from '@dreckly/cart';
 
-export default function CartPage() {
+const CartPage = () => {
   const { cart, isClient } = useCart();
 
   const cartCalculation =
@@ -189,4 +189,6 @@ export default function CartPage() {
       </div>
     </div>
   );
-}
+};
+
+export default CartPage;

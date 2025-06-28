@@ -1,6 +1,6 @@
 import { User, Mail, Phone, MapPin, Clock } from 'lucide-react';
 
-export default function UserPage() {
+const UserPage = () => {
   // Mock user data - this will be replaced with real user data when auth is implemented
   const user = {
     name: 'John Doe',
@@ -134,4 +134,6 @@ export default function UserPage() {
       </div>
     </div>
   );
-}
+};
+
+export default UserPage;

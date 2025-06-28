@@ -1,7 +1,7 @@
 import { CuisineFilter, CuisineProvider, Hero } from '@dreckly/home';
 import { RestaurantList } from '@dreckly/restaurants';
 
-export default async function Index() {
+const Index = async () => {
   return (
     <CuisineProvider>
       <Hero />
@@ -13,4 +13,6 @@ export default async function Index() {
       </section>
     </CuisineProvider>
   );
-}
+};
+
+export default Index;
