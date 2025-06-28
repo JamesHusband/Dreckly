@@ -21,8 +21,9 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       deliveryTime: '25-40 min',
       deliveryFee: 2.99,
       minimumOrder: 8.0,
-      image:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
+      image: '/images/restaurant/cornish-pasty-co/logo/cornish-pasty-co.webp',
+      coverImage:
+        '/images/restaurant/cornish-pasty-co/cover/cornish-pasty-co.webp',
       featured: true,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -38,7 +39,7 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               description: 'Traditional beef, potato, swede and onion pasty',
               price: 4.5,
               image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
+                '/images/restaurant/cornish-pasty-co/menu/traditional_pasty.png',
             },
             {
               id: '2',
@@ -47,15 +48,14 @@ export async function getRestaurants(): Promise<Restaurant[]> {
                 'Vegetarian pasty with mature cheddar and caramelized onions',
               price: 4.25,
               image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
+                '/images/restaurant/cornish-pasty-co/menu/cheese_and_onion_pasty.png',
             },
             {
               id: '3',
-              name: 'Steak & Kidney Pasty',
+              name: 'Steak Pasty',
               description: 'Premium steak and kidney with rich gravy',
               price: 5.25,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
+              image: '/images/restaurant/cornish-pasty-co/menu/steak_pasty.png',
             },
           ],
         },
@@ -68,15 +68,14 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               description: 'Free-range chicken with wild mushrooms and herbs',
               price: 4.75,
               image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
+                '/images/restaurant/cornish-pasty-co/menu/chicken_and_mushroom_pasty.png',
             },
             {
               id: '5',
               name: 'Fish Pasty',
               description: 'Fresh Cornish fish with parsley sauce',
               price: 5.5,
-              image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
+              image: '/images/restaurant/cornish-pasty-co/menu/fish_pasty.png',
             },
           ],
         },
@@ -89,7 +88,7 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               description: 'Local artisan cheese portion',
               price: 3.25,
               image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
+                '/images/restaurant/cornish-pasty-co/menu/cornish_yarg_cheese.png',
             },
             {
               id: '7',
@@ -97,7 +96,8 @@ export async function getRestaurants(): Promise<Restaurant[]> {
               description: 'Traditional scrumpy cider 500ml',
               price: 4.5,
               image:
-                'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=100&width=100',
+                '/images/restaurant/cornish-pasty-co/menu/cornish_cider.png',
+              ageRestricted: true,
             },
           ],
         },
@@ -111,8 +111,9 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       deliveryTime: '30-45 min',
       deliveryFee: 3.49,
       minimumOrder: 12.0,
-      image:
-        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
+      image: '/images/restaurant/fishermans-catch/logo/fishermans-catch.webp',
+      coverImage:
+        '/images/restaurant/fishermans-catch/cover/fishermans-catch.webp',
       featured: true,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -181,6 +182,8 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       minimumOrder: 15.0,
       image:
         'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
+      coverImage:
+        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -241,6 +244,8 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       minimumOrder: 10.0,
       image:
         'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
+      coverImage:
+        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -309,6 +314,8 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       minimumOrder: 12.0,
       image:
         'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
+      coverImage:
+        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:
@@ -378,6 +385,8 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       minimumOrder: 5.0,
       image:
         'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=200&width=300',
+      coverImage:
+        'https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=400&width=800',
       featured: false,
       address: '12 High Street, Truro, Cornwall TR1 2AB',
       description:

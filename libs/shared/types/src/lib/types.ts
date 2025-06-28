@@ -23,6 +23,7 @@ export interface MenuItem {
   description: string;
   price: number;
   image: string;
+  ageRestricted?: boolean;
 }
 
 export interface MenuCategory {
@@ -38,6 +39,7 @@ export interface Restaurant {
   deliveryTime: string;
   deliveryFee: number;
   image: string;
+  coverImage: string;
   featured: boolean;
   minimumOrder: number;
   description?: string;
