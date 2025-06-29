@@ -15,7 +15,7 @@ export const getUsers = async (): Promise<User[]> => {
         postcode: 'TR1 2LQ',
       },
       passwordHash: '$2a$10$dummyhashforpassword',
-      // favouriteRestaurants: [1, 3],
+      // TODO: favouriteRestaurants:
       orderHistory: ['1001', '1002', '1003', '1004', '1005'],
       createdAt: '2025-06-01T12:34:56Z',
     },

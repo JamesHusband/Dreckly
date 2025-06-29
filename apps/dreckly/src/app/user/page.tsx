@@ -15,7 +15,7 @@ const UserPage = () => {
   useEffect(() => {
     const fetchUserAndOrders = async () => {
       try {
-        // For now, we'll fetch the first user (ID: 1) - in a real app this would be the logged-in user
+        // TODO: Fetch the logged-in user
         const response = await fetch('/api/users/1');
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
