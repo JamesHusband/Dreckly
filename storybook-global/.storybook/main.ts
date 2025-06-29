@@ -14,6 +14,7 @@ const config: StorybookConfig = {
     name: '@storybook/nextjs',
     options: {},
   },
+  staticDirs: ['../../apps/dreckly/public/mocks'],
   webpackFinal: async (config) => {
     const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
     if (config.resolve) {
