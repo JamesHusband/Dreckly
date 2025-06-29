@@ -3,29 +3,11 @@
 import { User, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { getUserOrders } from '@dreckly/orders';
-
-interface Address {
-  line1: string;
-  line2: string;
-  city: string;
-  postcode: string;
-}
-
-interface UserData {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  phoneNumber: string;
-  address: Address;
-  passwordHash: string;
-  favouriteRestaurants?: string[];
-  orderHistory?: string[];
-  createdAt: string;
-}
+import { User as UserType, Address } from '@dreckly/types';
+import { formatDate, formatAddress } from '@dreckly/utils';
 
 const UserPage = () => {
-  const [user, setUser] = useState<UserData | null>(null);
+  const [user, setUser] = useState<UserType | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [orders, setOrders] = useState<any[]>([]);
@@ -92,20 +74,6 @@ const UserPage = () => {
     );
   }
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-GB', {
-      year: 'numeric',
-      month: 'long',
-    });
-  };
-
-  const formatAddress = (address: Address) => {
-    const parts = [address.line1];
-    if (address.line2) parts.push(address.line2);
-    parts.push(address.city, address.postcode);
-    return parts.join(', ');
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 py-8">
       <div className="container mx-auto px-4">
@@ -121,9 +89,6 @@ const UserPage = () => {
                   <h1 className="text-2xl font-bold text-gray-900">
                     {user.firstName} {user.lastName}
                   </h1>
-                  <p className="text-gray-600">
-                    Member since {formatDate(user.createdAt)}
-                  </p>
                 </div>
               </div>
             </div>
@@ -192,11 +157,11 @@ const UserPage = () => {
             </div>
           </aside>
 
-          {/* Main Content: Recent Orders */}
+          {/* Main Content: Order History */}
           <main className="md:w-2/3 w-full flex flex-col gap-6">
             <div className="bg-white rounded-lg shadow-sm p-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-4">
-                Recent Orders
+                Order History
               </h2>
               <div className="space-y-4">
                 {orders && orders.length > 0 ? (
@@ -208,10 +173,9 @@ const UserPage = () => {
                       <div className="flex justify-between items-start mb-2">
                         <div>
                           <p className="font-medium text-gray-900">
-                            Order #{order.id}
+                            {order.restaurantName}
                           </p>
                           <p className="text-sm text-gray-600">
-                            {order.restaurantName} &middot;{' '}
                             {order.items.reduce(
                               (sum: number, item: any) => sum + item.quantity,
                               0

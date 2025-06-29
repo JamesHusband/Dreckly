@@ -1,6 +1,13 @@
 // =====================
 // Base/Primitive Types
 // =====================
+export interface Address {
+  line1: string;
+  line2: string;
+  city: string;
+  postcode: string;
+}
+
 export interface Cuisine {
   name: string;
   icon:

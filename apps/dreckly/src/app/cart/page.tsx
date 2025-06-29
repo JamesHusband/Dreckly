@@ -3,15 +3,7 @@
 import { Trash2, MapPin, Clock } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  useCart,
-  createAddToCartHandler,
-  createRemoveFromCartHandler,
-  createSetQuantityHandler,
-  CartSidebar,
-  EmptyCart,
-  getCartTotals,
-} from '@dreckly/cart';
+import { useCart, CartSidebar, EmptyCart, getCartTotals } from '@dreckly/cart';
 import { formatPrice } from '@dreckly/utils';
 import { ItemCounter, BackButton } from '@dreckly/ui-kit';
 
@@ -30,8 +22,7 @@ const CartPage = () => {
           hasCartItems: false,
         };
 
-  const { cartItems, subtotal, deliveryFee, serviceFee, total, hasCartItems } =
-    cartTotals;
+  const { cartItems, hasCartItems } = cartTotals;
 
   if (!isClient || !cart) {
     return (
@@ -44,16 +35,15 @@ const CartPage = () => {
     );
   }
 
-  const { addToCart, removeFromCart, setItemQuantity, currentRestaurant } =
-    cart;
+  const { addToCart, removeFromCart, currentRestaurant } = cart;
 
   if (!hasCartItems) {
     return <EmptyCart />;
   }
 
-  const handleAddToCart = createAddToCartHandler(addToCart, currentRestaurant);
-  const handleRemoveFromCart = createRemoveFromCartHandler(removeFromCart);
-  const handleSetQuantity = createSetQuantityHandler(setItemQuantity);
+  const handleAddToCart = (itemId: string) =>
+    addToCart(itemId, currentRestaurant || undefined);
+  const handleRemoveFromCart = (itemId: string) => removeFromCart(itemId);
 
   return (
     <div className="min-h-screen bg-gray-50">
