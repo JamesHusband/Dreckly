@@ -1,7 +1,7 @@
 import { CartCalculationResult, CartCalculationParams } from '@dreckly/types';
 import { getCartStats } from '@dreckly/state';
 import { sumCartItems } from '../sumCartItems/sumCartItems';
-import { createCartItemsList } from '../createCartItemsList';
+import { createCartItemsList } from '@dreckly/utils';
 
 export const getCartTotals = ({
   cart,

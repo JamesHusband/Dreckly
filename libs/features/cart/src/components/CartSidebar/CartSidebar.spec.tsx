@@ -147,7 +147,7 @@ describe('CartSidebar', () => {
 
     const propsWithZeroMin = {
       restaurant: restaurantWithZeroMin,
-      cart: { 'item-1': 1 }, // Low quantity
+      cart: { 'item-1': 1 },
       onAddToCart: mockOnAddToCart,
       onRemoveFromCart: mockOnRemoveFromCart,
     };

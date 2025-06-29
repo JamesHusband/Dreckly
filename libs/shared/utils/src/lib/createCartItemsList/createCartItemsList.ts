@@ -14,4 +14,4 @@ export const createCartItemsList = (
       return item ? { ...item, quantity } : null;
     })
     .filter((item): item is CartItem => item !== null);
-};
+}; 

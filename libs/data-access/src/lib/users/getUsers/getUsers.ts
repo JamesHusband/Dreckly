@@ -6,17 +6,17 @@ export const getUsers = async (): Promise<User[]> => {
       id: 1,
       firstName: 'Joe',
       lastName: 'Johnson',
-      email: 'alex.johnson@example.com',
+      email: 'joe.johnson@example.com',
       phoneNumber: '+447911123456',
       address: {
-        line1: '12 Elm Street',
+        line1: '15 Lemon Street',
         line2: '',
-        city: 'London',
-        postcode: 'E1 6AN',
+        city: 'Truro',
+        postcode: 'TR1 2LQ',
       },
       passwordHash: '$2a$10$dummyhashforpassword',
-      // favouriteRestaurants: [1, 3],
-      // orderHistory: [1001, 1002],
+      // TODO: favouriteRestaurants:
+      orderHistory: ['1001', '1002', '1003', '1004', '1005'],
       createdAt: '2025-06-01T12:34:56Z',
     },
   ];

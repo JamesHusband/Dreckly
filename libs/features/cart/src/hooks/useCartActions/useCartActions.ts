@@ -14,23 +14,11 @@ export const useCartActions = () => {
     async (itemId: string, restaurant: Restaurant): Promise<boolean> => {
       if (!cart) return false;
 
-      console.log('addToCart called with:', {
-        itemId,
-        restaurantId: restaurant.id,
-        currentRestaurantId: cart.currentRestaurant?.id,
-        cartItems: Object.keys(cart.cart).length,
-      });
-
       if (
         cart.currentRestaurant &&
         cart.currentRestaurant.id !== restaurant.id &&
         cart.itemCount > 0
       ) {
-        console.log('Showing confirmation modal because:', {
-          hasCurrentRestaurant: !!cart.currentRestaurant,
-          differentRestaurant: cart.currentRestaurant.id !== restaurant.id,
-          hasItems: cart.itemCount > 0,
-        });
         showConfirmation(itemId, restaurant);
         return false;
       }

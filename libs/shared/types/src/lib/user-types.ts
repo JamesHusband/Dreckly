@@ -1,9 +1,5 @@
-interface Address {
-  line1: string;
-  line2: string;
-  city: string;
-  postcode: string;
-}
+import { Address } from './base-types';
+
 export interface User {
   id: number;
   firstName: string;
