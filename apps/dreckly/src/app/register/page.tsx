@@ -16,7 +16,7 @@ const RegisterPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle registration logic here
+    // TODO: Implement registration logic
     console.log('Registration attempt:', formData);
   };
 

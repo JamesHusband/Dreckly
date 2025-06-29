@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
+    // TODO: Implement login logic
     console.log('Login attempt:', { email, password });
   };
 
