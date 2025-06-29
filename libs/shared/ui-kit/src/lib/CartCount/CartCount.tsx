@@ -3,8 +3,6 @@
 import { useCartCount } from '@dreckly/cart';
 import { CartCountProps } from '@dreckly/types';
 
-// import { useCartCount } from '../../hooks/useCartCount';
-
 export const CartCount = ({ className = '' }: CartCountProps) => {
   const { count, isVisible, isLoading } = useCartCount();
 
