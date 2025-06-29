@@ -123,6 +123,7 @@ export interface ItemCounterProps {
 // =====================
 export interface PendingAction {
   itemId: string;
-  action: 'add' | 'remove';
-  timestamp: number;
+  restaurant: Restaurant;
+  action?: 'add' | 'remove';
+  timestamp?: number;
 }
