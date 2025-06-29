@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { FeaturedRestaurants } from './';
 import { getRestaurants } from '@dreckly/data-access';
 
@@ -23,7 +23,6 @@ describe('FeaturedRestaurants', () => {
       deliveryFee: 2.99,
       image: 'https://via.placeholder.com/150',
       featured: true,
-      minOrder: 10,
       minimumOrder: 10,
       description: 'A great restaurant',
       address: '123 Main St',
@@ -39,7 +38,6 @@ describe('FeaturedRestaurants', () => {
       deliveryFee: 3.49,
       image: 'https://via.placeholder.com/150',
       featured: false,
-      minOrder: 15,
       minimumOrder: 15,
       description: 'Another great restaurant',
       address: '456 Oak St',
@@ -54,12 +52,18 @@ describe('FeaturedRestaurants', () => {
   });
 
   it('should render', async () => {
-    render(await FeaturedRestaurants());
-    expect(screen.getByText('Featured restaurants')).toBeInTheDocument();
+    render(<FeaturedRestaurants />);
+
+    await waitFor(() => {
+      expect(screen.getByText('Featured restaurants')).toBeInTheDocument();
+    });
   });
 
   it('should only render featured restaurants', async () => {
-    render(await FeaturedRestaurants());
-    expect(screen.getAllByText('Mocked Restaurant Card')).toHaveLength(1);
+    render(<FeaturedRestaurants />);
+
+    await waitFor(() => {
+      expect(screen.getAllByText('Mocked Restaurant Card')).toHaveLength(1);
+    });
   });
 });

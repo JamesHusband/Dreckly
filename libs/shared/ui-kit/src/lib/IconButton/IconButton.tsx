@@ -1,22 +1,14 @@
 import { ReactNode } from 'react';
+import { IconButtonProps } from '@dreckly/types';
 
-interface IconButtonProps {
-  icon: ReactNode;
-  variant?: 'primary' | 'outline';
-  size?: 'sm' | 'md' | 'lg';
-  onClick?: () => void;
-  'aria-label': string;
-  disabled?: boolean;
-}
-
-export function IconButton({
+export const IconButton = ({
   icon,
   variant = 'primary',
   size = 'md',
   onClick,
   'aria-label': ariaLabel,
   disabled = false,
-}: IconButtonProps) {
+}: IconButtonProps) => {
   const baseClasses =
     'inline-flex items-center justify-center rounded-md font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2';
 
@@ -48,4 +40,4 @@ export function IconButton({
       {icon}
     </button>
   );
-}
+};

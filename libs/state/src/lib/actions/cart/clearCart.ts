@@ -7,8 +7,6 @@ export const clearCart = (
     set((state: CartState) => ({
       ...state,
       cart: {},
-      currentRestaurant: null,
-      menuItems: [],
     }));
   };
 };

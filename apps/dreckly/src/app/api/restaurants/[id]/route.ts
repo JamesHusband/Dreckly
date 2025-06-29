@@ -1,9 +1,9 @@
 import { getRestaurants } from '@dreckly/data-access';
 
-export async function GET(
+export const GET = async (
   request: Request,
   { params }: { params: Promise<{ id: string }> }
-) {
+) => {
   const { id } = await params;
   const restaurantsData = await getRestaurants();
   const restaurant = restaurantsData.find((r) => r.id.toString() === id);
@@ -22,4 +22,4 @@ export async function GET(
       'Content-Type': 'application/json',
     },
   });
-}
+};

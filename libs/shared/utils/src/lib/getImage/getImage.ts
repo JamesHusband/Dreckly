@@ -1,4 +1,4 @@
-const toKebabCase = (str: string): string => {
+const convertToKebabCase = (str: string): string => {
   return str
     .toLowerCase()
     .replace(/&/g, 'and')
@@ -8,8 +8,8 @@ const toKebabCase = (str: string): string => {
     .trim();
 };
 
-const getPlaceholderImage = (width = 200, height = 200): string => {
-  return `https://kzmkxsodp5ri9jc22k4a.lite.vusercontent.net/placeholder.svg?height=${height}&width=${width}`;
+const getFallbackImage = (width = 200, height = 200): string => {
+  return `https://via.placeholder.com/${width}x${height}?text=Image+Not+Found`;
 };
 
 export const getImage = (
@@ -19,29 +19,30 @@ export const getImage = (
   extension = 'webp'
 ): string => {
   try {
-    const kebabCaseName = toKebabCase(restaurantName);
+    const formattedRestaurantName = convertToKebabCase(restaurantName);
 
     if (type === 'menu' && !itemName) {
       throw new Error('Item name is required for menu images');
     }
 
-    const basePath = `/images/restaurant/${kebabCaseName}`;
+    const basePath = `/images/restaurant/${formattedRestaurantName}`;
 
     switch (type) {
       case 'logo':
-        return `${basePath}/logo/${kebabCaseName}.${extension}`;
+        return `${basePath}/logo/${formattedRestaurantName}.${extension}`;
       case 'cover':
-        return `${basePath}/cover/${kebabCaseName}.${extension}`;
+        return `${basePath}/cover/${formattedRestaurantName}.${extension}`;
       case 'menu': {
-        const kebabCaseItemName = toKebabCase(itemName as string);
-        return `${basePath}/menu/${kebabCaseItemName}.${extension}`;
+        if (!itemName) {
+          throw new Error('Item name is required for menu images');
+        }
+        const formattedItemName = convertToKebabCase(itemName);
+        return `${basePath}/menu/${formattedItemName}.${extension}`;
       }
       default:
         throw new Error(`Unknown image type: ${type}`);
     }
   } catch {
-    return getPlaceholderImage();
+    return getFallbackImage();
   }
 };
-
-export { getPlaceholderImage };

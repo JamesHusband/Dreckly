@@ -3,25 +3,16 @@
 import Image from 'next/image';
 import { Plus, Minus } from 'lucide-react';
 import { formatPrice, getImage } from '@dreckly/utils';
-import { MenuCategory as MenuCategoryType, Cart } from '@dreckly/types';
+import { MenuCategoryProps } from '@dreckly/types';
 
-interface MenuCategoryProps {
-  category: MenuCategoryType;
-  cart: Cart;
-  onAddToCart: (itemId: string) => void;
-  onRemoveFromCart: (itemId: string) => void;
-  isLast?: boolean;
-  restaurantName: string;
-}
-
-export function MenuCategory({
+export const MenuCategory = ({
   category,
   cart,
   onAddToCart,
   onRemoveFromCart,
   isLast = false,
   restaurantName,
-}: MenuCategoryProps) {
+}: MenuCategoryProps) => {
   return (
     <div className="mb-8">
       <h2 className="text-2xl font-bold mb-4">{category.name}</h2>
@@ -76,4 +67,4 @@ export function MenuCategory({
       {!isLast && <hr className="my-8 border-gray-200" />}
     </div>
   );
-}
+};

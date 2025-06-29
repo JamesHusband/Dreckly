@@ -1,5 +1,8 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { CuisineFilter, CuisineProvider } from './cuisineFilter';
+import { CuisineFilter } from './cuisineFilter';
+import { CuisineProvider } from '../../providers/CuisineProvider';
+
+global.fetch = jest.fn();
 
 jest.mock('@dreckly/data-access', () => ({
   getCuisines: jest.fn().mockResolvedValue([
@@ -44,6 +47,23 @@ const renderWithProvider = (component: React.ReactElement) => {
 describe('CuisineFilter', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+    (global.fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => [
+        {
+          name: 'Italian',
+          icon: 'Pizza',
+        },
+        {
+          name: 'Chinese',
+          icon: 'Utensils',
+        },
+        {
+          name: 'Japanese',
+          icon: 'Fish',
+        },
+      ],
+    });
   });
 
   it('should render the cuisine filter section', async () => {

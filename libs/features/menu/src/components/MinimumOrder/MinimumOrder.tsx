@@ -1,6 +1,10 @@
 import { formatPrice } from '@dreckly/utils';
 
-export function MinimumOrder({ minOrder }: { minOrder: number | undefined }) {
+export const MinimumOrder = ({
+  minOrder,
+}: {
+  minOrder: number | undefined;
+}) => {
   const orderAmount = minOrder ?? 0;
 
   return (
@@ -10,4 +14,4 @@ export function MinimumOrder({ minOrder }: { minOrder: number | undefined }) {
       </span>
     </div>
   );
-}
+};

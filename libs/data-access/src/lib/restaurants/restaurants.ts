@@ -1,6 +1,6 @@
 import { Restaurant } from '@dreckly/types';
 
-export async function getRestaurant(id: string): Promise<Restaurant> {
+export const getRestaurant = async (id: string): Promise<Restaurant> => {
   const res = await fetch(`http://localhost:3000/api/restaurants/${id}`);
 
   if (!res.ok) {
@@ -8,9 +8,9 @@ export async function getRestaurant(id: string): Promise<Restaurant> {
   }
 
   return res.json() as Promise<Restaurant>;
-}
+};
 
-export async function getRestaurants(): Promise<Restaurant[]> {
+export const getRestaurants = async (): Promise<Restaurant[]> => {
   return [
     {
       id: 1,
@@ -363,4 +363,4 @@ export async function getRestaurants(): Promise<Restaurant[]> {
       ],
     },
   ];
-}
+};

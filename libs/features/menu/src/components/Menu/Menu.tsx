@@ -6,14 +6,10 @@ import { MinimumOrder } from '../MinimumOrder';
 import { MenuCartSidebar } from '../MenuCartSidebar';
 import { BackButton, ConfirmationModal } from '@dreckly/ui-kit';
 import { CartLoading } from '@dreckly/cart';
-import { Restaurant } from '@dreckly/types';
+import { Restaurant, RestaurantMenuProps } from '@dreckly/types';
 import { useCartActions, useCart } from '@dreckly/cart';
 
-interface RestaurantMenuProps {
-  restaurant: Restaurant;
-}
-
-export function Menu({ restaurant }: RestaurantMenuProps) {
+export const Menu = ({ restaurant }: RestaurantMenuProps) => {
   const {
     addToCart,
     removeFromCart,
@@ -92,4 +88,4 @@ export function Menu({ restaurant }: RestaurantMenuProps) {
       />
     </>
   );
-}
+};

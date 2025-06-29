@@ -1,11 +1,5 @@
-import { Cuisine } from '@dreckly/types';
+import { Cuisine, CuisineCardProps } from '@dreckly/types';
 import React from 'react';
-
-interface CuisineCardProps extends Cuisine {
-  iconComponent: React.ElementType;
-  onClick?: () => void;
-  isSelected?: boolean;
-}
 
 export const CuisineCard = ({
   name,

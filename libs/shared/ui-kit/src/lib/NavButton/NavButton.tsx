@@ -1,14 +1,6 @@
 import { ReactNode } from 'react';
 import Link from 'next/link';
-
-interface NavButtonProps {
-  href?: string;
-  onClick?: () => void;
-  children?: ReactNode;
-  icon?: ReactNode;
-  showText?: boolean;
-  text?: string;
-}
+import { NavButtonProps } from '@dreckly/types';
 
 export const NavButton = ({
   href,

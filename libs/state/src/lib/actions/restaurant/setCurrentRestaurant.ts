@@ -1,14 +1,12 @@
 import { CartState, Restaurant } from '@dreckly/types';
 
-export const setCurrentRestaurant = (set: any) => {
+export const setCurrentRestaurant = (
+  set: (fn: (state: CartState) => CartState) => void
+) => {
   return (restaurant: Restaurant) => {
-    const allMenuItems = (restaurant.menu ?? []).flatMap(
-      (category) => category.items
-    );
     set((state: CartState) => ({
       ...state,
       currentRestaurant: restaurant,
-      menuItems: allMenuItems,
     }));
   };
 };

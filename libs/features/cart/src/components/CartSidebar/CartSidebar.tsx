@@ -1,20 +1,14 @@
 import { formatPrice } from '@dreckly/utils';
 import { Clock } from 'lucide-react';
-import { Restaurant } from '@dreckly/types';
-interface CartSidebarProps {
-  subtotal: number;
-  deliveryFee: number;
-  serviceFee: number;
-  total: number;
-  currentRestaurant: Restaurant;
-}
-export function CartSidebar({
-  subtotal,
-  deliveryFee,
-  serviceFee,
-  total,
-  currentRestaurant,
-}: CartSidebarProps) {
+import { CartSidebarProps } from '@dreckly/types';
+import { getCartTotals } from '../../utils/getCartTotals';
+
+export const CartSidebar = ({ restaurant, cart }: CartSidebarProps) => {
+  const { subtotal, deliveryFee, serviceFee, total } = getCartTotals({
+    cart,
+    restaurant,
+  });
+
   return (
     <div className="lg:col-span-1">
       <div className="bg-white border border-gray-200 rounded-lg shadow-sm sticky top-24">
@@ -46,16 +40,14 @@ export function CartSidebar({
             <button
               type="button"
               className={`w-full bg-orange-500 hover:bg-orange-600 text-white text-lg py-6 rounded-md font-medium transition-colors ${
-                subtotal < (currentRestaurant?.minimumOrder || 0)
+                subtotal < (restaurant?.minimumOrder || 0)
                   ? 'opacity-60 cursor-not-allowed'
                   : ''
               }`}
-              disabled={subtotal < (currentRestaurant?.minimumOrder || 0)}
+              disabled={subtotal < (restaurant?.minimumOrder || 0)}
             >
-              {subtotal < (currentRestaurant?.minimumOrder || 0)
-                ? `Minimum order ${formatPrice(
-                    currentRestaurant?.minimumOrder || 0
-                  )}`
+              {subtotal < (restaurant?.minimumOrder || 0)
+                ? `Minimum order ${formatPrice(restaurant?.minimumOrder || 0)}`
                 : 'Proceed to Checkout'}
             </button>
             <p className="text-xs text-gray-500 text-center">
@@ -76,4 +68,4 @@ export function CartSidebar({
       </div>
     </div>
   );
-}
+};

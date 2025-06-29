@@ -3,20 +3,14 @@
 import { Minus, Plus } from 'lucide-react';
 import { useCart } from '@dreckly/cart';
 import { IconButton } from '../IconButton';
+import { ItemCounterProps } from '@dreckly/types';
 
-interface ItemCounterProps {
-  id: string;
-  onAdd?: (itemId: string) => void;
-  onRemove?: (itemId: string) => void;
-  quantity?: number;
-}
-
-export function ItemCounter({
+export const ItemCounter = ({
   id,
   onAdd,
   onRemove,
   quantity,
-}: ItemCounterProps) {
+}: ItemCounterProps) => {
   const { cart } = useCart();
 
   if (!cart) {
@@ -63,9 +57,9 @@ export function ItemCounter({
     );
   }
 
-  const { getCartQuantity, addToCart, removeFromCart } = cart;
+  const { getItemQuantity, addToCart, removeFromCart } = cart;
 
-  const itemQuantity = quantity ?? getCartQuantity(id);
+  const itemQuantity = quantity ?? getItemQuantity(id);
 
   const handleAdd = onAdd ?? addToCart;
   const handleRemove = onRemove ?? removeFromCart;
@@ -93,4 +87,4 @@ export function ItemCounter({
       />
     </div>
   );
-}
+};

@@ -14,25 +14,11 @@ export const useCartActions = () => {
     async (itemId: string, restaurant: Restaurant): Promise<boolean> => {
       if (!cart) return false;
 
-      console.log('addToCart called with:', {
-        itemId,
-        restaurantId: restaurant.id,
-        currentRestaurantId: cart.currentRestaurant?.id,
-        hasItems: cart.hasItems,
-        cartItems: Object.keys(cart.cart).length,
-      });
-
-      // Only show confirmation if there are items in cart AND it's a different restaurant
       if (
         cart.currentRestaurant &&
         cart.currentRestaurant.id !== restaurant.id &&
-        cart.hasItems
+        cart.itemCount > 0
       ) {
-        console.log('Showing confirmation modal because:', {
-          hasCurrentRestaurant: !!cart.currentRestaurant,
-          differentRestaurant: cart.currentRestaurant.id !== restaurant.id,
-          hasItems: cart.hasItems,
-        });
         showConfirmation(itemId, restaurant);
         return false;
       }
@@ -72,7 +58,6 @@ export const useCartActions = () => {
     (itemId: string, restaurant: Restaurant) => {
       if (!cart) return false;
 
-      // Start new order and add the item atomically
       cart.startNewOrder(restaurant, itemId);
       return true;
     },

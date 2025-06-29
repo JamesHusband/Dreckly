@@ -1,7 +1,7 @@
 import { Cuisine } from '@dreckly/types';
 
-export async function getCuisines(): Promise<Cuisine[]> {
-  // Mock data - in a real app this would come from a database
+export const getCuisines = async (): Promise<Cuisine[]> => {
+  // TODO: replace Mock data with actual DB data
   return [
     { name: 'Cornish', icon: 'PieChart' },
     { name: 'Fish & Chips', icon: 'Fish' },
@@ -12,4 +12,4 @@ export async function getCuisines(): Promise<Cuisine[]> {
     { name: 'Desserts', icon: 'Cake' },
     { name: 'Healthy', icon: 'Salad' },
   ];
-}
+};

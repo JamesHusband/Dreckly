@@ -8,7 +8,7 @@ export const Hero = () => (
         <p className="text-xl mb-8 opacity-90">
           Discover the best Cornish food delivered straight to your doorstep
         </p>
-        {/* <PostcodeSearch /> */}
+        {/* TODO: <PostcodeSearch /> */}
       </div>
     </div>
   </section>

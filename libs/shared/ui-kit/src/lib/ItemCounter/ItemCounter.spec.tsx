@@ -9,7 +9,7 @@ const mockUseCart = require('@dreckly/cart').useCart;
 
 describe('ItemCounter', () => {
   const mockCart = {
-    getCartQuantity: jest.fn(),
+    getItemQuantity: jest.fn(),
     addToCart: jest.fn(),
     removeFromCart: jest.fn(),
   };
@@ -20,7 +20,7 @@ describe('ItemCounter', () => {
 
   it('should render with cart context and quantity > 0', () => {
     mockUseCart.mockReturnValue({ cart: mockCart });
-    mockCart.getCartQuantity.mockReturnValue(2);
+    mockCart.getItemQuantity.mockReturnValue(2);
 
     render(<ItemCounter id="item-1" />);
 
@@ -35,7 +35,7 @@ describe('ItemCounter', () => {
 
   it('should render with cart context and quantity = 0', () => {
     mockUseCart.mockReturnValue({ cart: mockCart });
-    mockCart.getCartQuantity.mockReturnValue(0);
+    mockCart.getItemQuantity.mockReturnValue(0);
 
     render(<ItemCounter id="item-1" />);
 
@@ -82,7 +82,7 @@ describe('ItemCounter', () => {
 
   it('should call cart addToCart when add button is clicked with cart context', () => {
     mockUseCart.mockReturnValue({ cart: mockCart });
-    mockCart.getCartQuantity.mockReturnValue(1);
+    mockCart.getItemQuantity.mockReturnValue(1);
 
     render(<ItemCounter id="item-1" />);
 
@@ -94,7 +94,7 @@ describe('ItemCounter', () => {
 
   it('should call cart removeFromCart when remove button is clicked with cart context', () => {
     mockUseCart.mockReturnValue({ cart: mockCart });
-    mockCart.getCartQuantity.mockReturnValue(1);
+    mockCart.getItemQuantity.mockReturnValue(1);
 
     render(<ItemCounter id="item-1" />);
 

@@ -21,7 +21,7 @@ export const useNewOrder = () => {
 
       if (cart.currentRestaurant.id === restaurant.id) return true;
 
-      if (!cart.hasItems) return true;
+      if (cart.itemCount === 0) return true;
 
       return false;
     },
@@ -32,7 +32,7 @@ export const useNewOrder = () => {
     async (restaurant: Restaurant): Promise<boolean> => {
       if (!cart) return false;
 
-      if (cart.hasItems) {
+      if (cart.itemCount > 0) {
         return false;
       }
 
@@ -56,7 +56,7 @@ export const useNewOrder = () => {
     startNewOrder,
     needsRestaurantSwitch,
     canAddToCart,
-    hasItems: cart?.hasItems || false,
+    hasItems: (cart?.itemCount ?? 0) > 0,
     currentRestaurant: cart?.currentRestaurant || null,
   };
 };

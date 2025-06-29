@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useCartStore } from '@dreckly/state';
-import { UseCartReturn } from '../types';
+import { Restaurant, UseCartReturn } from '@dreckly/types';
 
 export const useCart = (): {
   cart: UseCartReturn | null;
@@ -22,14 +22,14 @@ export const useCart = (): {
         removeFromCart: store.removeFromCart,
         clearCart: store.clearCart,
         setItemQuantity: store.setItemQuantity,
-        getCartQuantity: store.getItemQuantity,
-        hasItems: store.hasItems(),
+        getItemQuantity: store.getItemQuantity,
+        getCartItems: store.getCartItems,
+        startNewOrder: (restaurant: Restaurant, itemId?: string) =>
+          store.startNewOrder(restaurant, itemId),
         itemCount: store.itemCount(),
         totalItems: store.totalItems(),
         currentRestaurant: store.currentRestaurant,
-        menuItems: store.menuItems,
         setCurrentRestaurant: store.setCurrentRestaurant,
-        startNewOrder: store.startNewOrder,
       }
     : null;
 

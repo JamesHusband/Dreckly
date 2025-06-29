@@ -4,13 +4,13 @@ import type React from 'react';
 import Link from 'next/link';
 import { useState } from 'react';
 
-export default function LoginPage() {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle login logic here
+    // TODO: Implement login logic
     console.log('Login attempt:', { email, password });
   };
 
@@ -142,4 +142,6 @@ export default function LoginPage() {
       </div>
     </div>
   );
-}
+};
+
+export default LoginPage;

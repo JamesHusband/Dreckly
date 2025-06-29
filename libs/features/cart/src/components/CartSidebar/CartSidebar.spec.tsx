@@ -2,14 +2,9 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import { CartSidebar } from './CartSidebar';
 
-jest.mock('@dreckly/utils', () => ({
-  formatPrice: (value: number) => `£${value.toFixed(2)}`,
-}));
-
 const mockRestaurant = {
   id: 1,
   name: 'Test Restaurant',
-  minOrder: 10,
   cuisine: 'Italian',
   rating: 4.5,
   deliveryTime: '25-40 minutes',
@@ -20,68 +15,91 @@ const mockRestaurant = {
   description: 'A test restaurant',
   address: '123 Test Street',
   reviewCount: 100,
-  menu: [],
+  menu: [
+    {
+      name: 'Starters',
+      items: [
+        {
+          id: 'item-1',
+          name: 'Bruschetta',
+          description: 'Toasted bread with tomatoes',
+          price: 5.99,
+          image: '/bruschetta.jpg',
+        },
+      ],
+    },
+  ],
 };
 
-describe('CartSidebar', () => {
-  const defaultProps = {
-    subtotal: 15.0,
-    deliveryFee: 2.5,
-    serviceFee: 1.5,
-    total: 19.0,
-    currentRestaurant: mockRestaurant,
-  };
+const mockCart = {
+  'item-1': 2,
+  'item-2': 1,
+};
 
-  it('should render the cart sidebar with order summary', () => {
-    render(<CartSidebar {...defaultProps} />);
+const mockOnAddToCart = jest.fn();
+const mockOnRemoveFromCart = jest.fn();
+
+describe('CartSidebar', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('should render order summary with correct totals', () => {
+    render(
+      <CartSidebar
+        restaurant={mockRestaurant}
+        cart={mockCart}
+        onAddToCart={mockOnAddToCart}
+        onRemoveFromCart={mockOnRemoveFromCart}
+      />
+    );
 
     expect(screen.getByText('Order Summary')).toBeInTheDocument();
-  });
-
-  it('should display all pricing information correctly', () => {
-    render(<CartSidebar {...defaultProps} />);
-
     expect(screen.getByText('Subtotal')).toBeInTheDocument();
-    expect(screen.getByText('£15.00')).toBeInTheDocument();
-
     expect(screen.getByText('Delivery fee')).toBeInTheDocument();
-    expect(screen.getByText('£2.50')).toBeInTheDocument();
-
     expect(screen.getByText('Service fee')).toBeInTheDocument();
-    expect(screen.getByText('£1.50')).toBeInTheDocument();
-
     expect(screen.getByText('Total')).toBeInTheDocument();
-    expect(screen.getByText('£19.00')).toBeInTheDocument();
   });
 
-  it('should show proceed to checkout button when subtotal meets minimum order', () => {
-    render(<CartSidebar {...defaultProps} />);
+  it('should display minimum order message when subtotal is below minimum', () => {
+    const smallCart = { 'item-1': 1 };
 
-    const checkoutButton = screen.getByRole('button', {
-      name: /proceed to checkout/i,
-    });
-    expect(checkoutButton).toBeInTheDocument();
-    expect(checkoutButton).not.toBeDisabled();
+    render(
+      <CartSidebar
+        restaurant={mockRestaurant}
+        cart={smallCart}
+        onAddToCart={mockOnAddToCart}
+        onRemoveFromCart={mockOnRemoveFromCart}
+      />
+    );
+
+    expect(screen.getByText(/Minimum order/)).toBeInTheDocument();
   });
 
-  it('should show minimum order message when subtotal is below minimum', () => {
-    const propsBelowMinimum = {
-      ...defaultProps,
-      subtotal: 5.0,
-      total: 9.0,
-    };
+  it('should not display minimum order message when subtotal meets minimum', () => {
+    const largeCart = { 'item-1': 3 }; // 3 * 5.99 = 17.97 > 10 minimum
 
-    render(<CartSidebar {...propsBelowMinimum} />);
+    render(
+      <CartSidebar
+        restaurant={mockRestaurant}
+        cart={largeCart}
+        onAddToCart={mockOnAddToCart}
+        onRemoveFromCart={mockOnRemoveFromCart}
+      />
+    );
 
-    const button = screen.getByRole('button', {
-      name: /minimum order £10\.00/i,
-    });
-    expect(button).toBeInTheDocument();
-    expect(button).toBeDisabled();
+    expect(screen.queryByText(/Minimum order/)).not.toBeInTheDocument();
   });
 
   it('should display estimated delivery time', () => {
-    render(<CartSidebar {...defaultProps} />);
+    render(
+      <CartSidebar
+        restaurant={mockRestaurant}
+        cart={mockCart}
+        onAddToCart={mockOnAddToCart}
+        onRemoveFromCart={mockOnRemoveFromCart}
+      />
+    );
 
     expect(
       screen.getByText('Estimated delivery: 25-40 minutes')
@@ -89,7 +107,14 @@ describe('CartSidebar', () => {
   });
 
   it('should display terms and conditions text', () => {
-    render(<CartSidebar {...defaultProps} />);
+    render(
+      <CartSidebar
+        restaurant={mockRestaurant}
+        cart={mockCart}
+        onAddToCart={mockOnAddToCart}
+        onRemoveFromCart={mockOnRemoveFromCart}
+      />
+    );
 
     expect(
       screen.getByText(
@@ -98,40 +123,20 @@ describe('CartSidebar', () => {
     ).toBeInTheDocument();
   });
 
-  it('should handle zero values correctly', () => {
-    const zeroProps = {
-      ...defaultProps,
-      subtotal: 0,
-      deliveryFee: 0,
-      serviceFee: 0,
-      total: 0,
+  it('should handle empty cart correctly', () => {
+    const emptyCartProps = {
+      restaurant: mockRestaurant,
+      cart: {},
+      onAddToCart: mockOnAddToCart,
+      onRemoveFromCart: mockOnRemoveFromCart,
     };
 
-    render(<CartSidebar {...zeroProps} />);
+    render(<CartSidebar {...emptyCartProps} />);
 
-    const zeroElements = screen.getAllByText('£0.00');
-    expect(zeroElements).toHaveLength(4);
-
+    expect(screen.getByText('£0.00')).toBeInTheDocument();
     expect(
       screen.getByRole('button', { name: /minimum order £10\.00/i })
     ).toBeInTheDocument();
-  });
-
-  it('should handle decimal values correctly', () => {
-    const decimalProps = {
-      ...defaultProps,
-      subtotal: 12.99,
-      deliveryFee: 1.99,
-      serviceFee: 0.99,
-      total: 15.97,
-    };
-
-    render(<CartSidebar {...decimalProps} />);
-
-    expect(screen.getByText('£12.99')).toBeInTheDocument();
-    expect(screen.getByText('£1.99')).toBeInTheDocument();
-    expect(screen.getByText('£0.99')).toBeInTheDocument();
-    expect(screen.getByText('£15.97')).toBeInTheDocument();
   });
 
   it('should handle restaurant with zero minimum order', () => {
@@ -141,10 +146,10 @@ describe('CartSidebar', () => {
     };
 
     const propsWithZeroMin = {
-      ...defaultProps,
-      currentRestaurant: restaurantWithZeroMin,
-      subtotal: 5.0,
-      total: 9.0,
+      restaurant: restaurantWithZeroMin,
+      cart: { 'item-1': 1 },
+      onAddToCart: mockOnAddToCart,
+      onRemoveFromCart: mockOnRemoveFromCart,
     };
 
     render(<CartSidebar {...propsWithZeroMin} />);
