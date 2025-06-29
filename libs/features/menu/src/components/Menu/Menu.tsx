@@ -6,7 +6,7 @@ import { MinimumOrder } from '../MinimumOrder';
 import { MenuCartSidebar } from '../MenuCartSidebar';
 import { BackButton, ConfirmationModal } from '@dreckly/ui-kit';
 import { CartLoading } from '@dreckly/cart';
-import { Restaurant, RestaurantMenuProps } from '@dreckly/types';
+import { RestaurantMenuProps } from '@dreckly/types';
 import { useCartActions, useCart } from '@dreckly/cart';
 
 export const Menu = ({ restaurant }: RestaurantMenuProps) => {
@@ -68,7 +68,10 @@ export const Menu = ({ restaurant }: RestaurantMenuProps) => {
             </div>
 
             <MenuCartSidebar
-              restaurant={restaurant}
+              name={restaurant.name}
+              menu={restaurant.menu}
+              deliveryFee={restaurant.deliveryFee}
+              minimumOrder={restaurant.minimumOrder}
               cart={cart.cart}
               onAddToCart={handleAddToCart}
               onRemoveFromCart={handleRemoveFromCart}

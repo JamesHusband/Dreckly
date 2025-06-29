@@ -2,22 +2,28 @@ import Link from 'next/link';
 import { formatPrice } from '@dreckly/utils';
 import { getCartTotals } from '@dreckly/cart';
 import { MenuCartItem } from '../MenuCartItem';
-import { Restaurant, Cart, CartSidebarProps } from '@dreckly/types';
+import { CartSidebarProps } from '@dreckly/types';
 
 export const MenuCartSidebar = ({
-  restaurant,
+  name,
+  menu,
+  deliveryFee,
+  minimumOrder,
   cart,
   onAddToCart,
   onRemoveFromCart,
 }: CartSidebarProps) => {
-  const { subtotal, hasCartItems } = getCartTotals({ cart, restaurant });
+  const { subtotal, hasCartItems } = getCartTotals({
+    cart,
+    restaurant: { name, menu, deliveryFee, minimumOrder },
+  });
 
   return (
     <div className="lg:col-span-1">
       <div className="bg-white border border-gray-200 rounded-lg shadow-sm sticky top-24">
         <div className="p-4 border-b border-gray-200">
           <h3 className="text-lg font-semibold">Your Order</h3>
-          <p className="text-sm text-gray-600">From {restaurant.name}</p>
+          <p className="text-sm text-gray-600">From {name}</p>
         </div>
         <div className="p-4">
           {!hasCartItems ? (
@@ -25,7 +31,7 @@ export const MenuCartSidebar = ({
           ) : (
             <>
               <div className="space-y-3 mb-4">
-                {(restaurant.menu ?? []).map((category) =>
+                {(menu ?? []).map((category) =>
                   category.items.map((item) => (
                     <MenuCartItem
                       key={item.id}
@@ -47,12 +53,12 @@ export const MenuCartSidebar = ({
                 </div>
                 <div className="flex justify-between">
                   <span>Delivery</span>
-                  <span>{formatPrice(restaurant.deliveryFee)}</span>
+                  <span>{formatPrice(deliveryFee)}</span>
                 </div>
                 <hr className="border-gray-200" />
                 <div className="flex justify-between font-bold">
                   <span>Total</span>
-                  <span>{formatPrice(subtotal + restaurant.deliveryFee)}</span>
+                  <span>{formatPrice(subtotal + deliveryFee)}</span>
                 </div>
               </div>
 
@@ -60,14 +66,14 @@ export const MenuCartSidebar = ({
                 <button
                   type="button"
                   className={`w-full mt-4 py-3 px-4 rounded-md font-medium transition-colors ${
-                    subtotal < (restaurant.minimumOrder ?? 0)
+                    subtotal < (minimumOrder ?? 0)
                       ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
                       : 'bg-orange-500 hover:bg-orange-600 text-white'
                   }`}
-                  disabled={subtotal < (restaurant.minimumOrder ?? 0)}
+                  disabled={subtotal < (minimumOrder ?? 0)}
                 >
-                  {subtotal < (restaurant.minimumOrder ?? 0)
-                    ? `Minimum order ${formatPrice(restaurant.minimumOrder)}`
+                  {subtotal < (minimumOrder ?? 0)
+                    ? `Minimum order ${formatPrice(minimumOrder)}`
                     : 'Proceed to Checkout'}
                 </button>
               </Link>

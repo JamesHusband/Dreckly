@@ -1,5 +1,6 @@
 import type { MenuItem, Cart } from './base-types';
 import type { Restaurant } from './restaurant-types';
+import type { MenuCategory } from './base-types';
 
 // =====================
 // Core Cart Types
@@ -92,8 +93,18 @@ export interface CartItemProps {
   onRemove: (itemId: string) => void;
 }
 
+export interface GetCartTotalsParams {
+  cart: Record<string, number>;
+  restaurant: CartRestaurant;
+  serviceFee?: number;
+}
+
+// Slim version of Restaurant for MenuCartSidebar
 export interface CartSidebarProps {
-  restaurant: Restaurant;
+  name: string;
+  menu: MenuCategory[];
+  deliveryFee: number;
+  minimumOrder: number;
   cart: Cart;
   onAddToCart: (itemId: string) => void;
   onRemoveFromCart: (itemId: string) => void;
@@ -127,3 +138,11 @@ export interface PendingAction {
   action?: 'add' | 'remove';
   timestamp?: number;
 }
+
+// Minimal shape for restaurant used in cart calculations
+export type CartRestaurant = {
+  name: string;
+  menu: MenuCategory[];
+  deliveryFee: number;
+  minimumOrder: number;
+};
