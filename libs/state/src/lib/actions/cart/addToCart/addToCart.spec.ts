@@ -42,6 +42,107 @@ const mockState: CartState = {
   currentRestaurant: null,
 };
 
+// Import the pure functions for testing
+const {
+  shouldStartNewOrder,
+  createNewOrderState,
+  incrementItemQuantity,
+  determineCartAction,
+} = require('./addToCart.js');
+
+describe('Pure Functions', () => {
+  describe('shouldStartNewOrder', () => {
+    it('should return true when restaurants are different', () => {
+      const state = {
+        ...mockState,
+        currentRestaurant: { ...mockRestaurant, id: 1 },
+      };
+      const differentRestaurant = { ...mockRestaurant, id: 2 };
+
+      expect(shouldStartNewOrder(state, differentRestaurant)).toBe(true);
+    });
+
+    it('should return false when restaurants are the same', () => {
+      const state = {
+        ...mockState,
+        currentRestaurant: { ...mockRestaurant, id: 1 },
+      };
+      const sameRestaurant = { ...mockRestaurant, id: 1 };
+
+      expect(shouldStartNewOrder(state, sameRestaurant)).toBe(false);
+    });
+
+    it('should return true when no current restaurant', () => {
+      const state = { ...mockState, currentRestaurant: null };
+
+      expect(shouldStartNewOrder(state, mockRestaurant)).toBe(true);
+    });
+  });
+
+  describe('createNewOrderState', () => {
+    it('should create new order state with single item', () => {
+      const state = { ...mockState, cart: { 'item-1': 2 } };
+      const result = createNewOrderState(state, 'item-2', mockRestaurant);
+
+      expect(result.cart).toEqual({ 'item-2': 1 });
+      expect(result.currentRestaurant).toBe(mockRestaurant);
+    });
+  });
+
+  describe('incrementItemQuantity', () => {
+    it('should increment existing item quantity', () => {
+      const state = {
+        ...mockState,
+        cart: { 'item-1': 2 },
+        currentRestaurant: mockRestaurant,
+      };
+      const result = incrementItemQuantity(state, 'item-1', mockRestaurant);
+
+      expect(result.cart).toEqual({ 'item-1': 3 });
+      expect(result.currentRestaurant).toBe(mockRestaurant);
+    });
+
+    it('should add new item with quantity 1', () => {
+      const state = {
+        ...mockState,
+        cart: { 'item-1': 2 },
+        currentRestaurant: mockRestaurant,
+      };
+      const result = incrementItemQuantity(state, 'item-2', mockRestaurant);
+
+      expect(result.cart).toEqual({ 'item-1': 2, 'item-2': 1 });
+      expect(result.currentRestaurant).toBe(mockRestaurant);
+    });
+  });
+
+  describe('determineCartAction', () => {
+    it('should start new order when restaurants are different', () => {
+      const state = {
+        ...mockState,
+        cart: { 'item-1': 1 },
+        currentRestaurant: { ...mockRestaurant, id: 1 },
+      };
+      const differentRestaurant = { ...mockRestaurant, id: 2 };
+      const result = determineCartAction(state, 'item-2', differentRestaurant);
+
+      expect(result.cart).toEqual({ 'item-2': 1 });
+      expect(result.currentRestaurant).toBe(differentRestaurant);
+    });
+
+    it('should increment quantity when same restaurant', () => {
+      const state = {
+        ...mockState,
+        cart: { 'item-1': 1 },
+        currentRestaurant: mockRestaurant,
+      };
+      const result = determineCartAction(state, 'item-1', mockRestaurant);
+
+      expect(result.cart).toEqual({ 'item-1': 2 });
+      expect(result.currentRestaurant).toBe(mockRestaurant);
+    });
+  });
+});
+
 describe('addToCart', () => {
   let mockSet: jest.Mock;
 
@@ -116,23 +217,6 @@ describe('addToCart', () => {
 
     expect(newState.cart).toEqual({ 'item-3': 1 });
     expect(newState.currentRestaurant).toBe(differentRestaurant);
-  });
-
-  it('should clear cart and start fresh when cart has items but no current restaurant', () => {
-    const addToCartAction = addToCart(mockSet);
-    const initialState = {
-      ...mockState,
-      cart: { 'item-1': 2, 'item-2': 1 },
-      currentRestaurant: null,
-    };
-
-    addToCartAction('item-3', mockRestaurant);
-
-    const setFunction = mockSet.mock.calls[0][0];
-    const newState = setFunction(initialState);
-
-    expect(newState.cart).toEqual({ 'item-3': 1 });
-    expect(newState.currentRestaurant).toBe(mockRestaurant);
   });
 
   it('should add new item to existing cart with same restaurant', () => {

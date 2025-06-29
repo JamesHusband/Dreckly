@@ -33,12 +33,3 @@ export interface Order {
   };
   specialInstructions?: string;
 }
-
-export interface RecentOrder {
-  id: string;
-  restaurantName: string;
-  total: number;
-  status: Order['status'];
-  orderDate: string;
-  itemCount: number;
-}

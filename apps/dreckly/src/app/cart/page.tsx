@@ -156,15 +156,6 @@ const CartPage = () => {
               </div>
             </div>
           </div>
-
-          <div className="mt-8 flex justify-end">
-            <Link
-              href="/checkout"
-              className="bg-orange-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-orange-600 transition-colors"
-            >
-              Proceed to Checkout
-            </Link>
-          </div>
         </div>
       </div>
     </div>

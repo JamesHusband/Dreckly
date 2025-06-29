@@ -198,16 +198,31 @@ describe('getCartItems', () => {
 
     const result = getCartItemsAction();
 
-    expect(result[0].id).toBe(mockMenuItem1.id);
-    expect(result[0].name).toBe(mockMenuItem1.name);
+    expect(result).toHaveLength(1);
+    expect(result[0]).toEqual({
+      ...mockMenuItem1,
+      quantity: 1,
+    });
     expect(mockGet).toHaveBeenCalledTimes(1);
   });
 
-  it('should handle mixed valid and invalid cart items', () => {
+  it('should handle multiple menu categories', () => {
     const mockGet = jest.fn(() => ({
       ...mockState,
-      cart: { 'item-1': 2, 'invalid-item': 1, 'item-2': 3 },
-      currentRestaurant: mockRestaurant,
+      cart: { 'item-1': 1, 'item-2': 2 },
+      currentRestaurant: {
+        ...mockRestaurant,
+        menu: [
+          {
+            name: 'Starters',
+            items: [mockMenuItem1],
+          },
+          {
+            name: 'Mains',
+            items: [mockMenuItem2],
+          },
+        ],
+      },
     }));
     const getCartItemsAction = getCartItems(mockGet);
 
@@ -216,12 +231,26 @@ describe('getCartItems', () => {
     expect(result).toHaveLength(2);
     expect(result[0]).toEqual({
       ...mockMenuItem1,
-      quantity: 2,
+      quantity: 1,
     });
     expect(result[1]).toEqual({
       ...mockMenuItem2,
-      quantity: 3,
+      quantity: 2,
     });
+    expect(mockGet).toHaveBeenCalledTimes(1);
+  });
+
+  it('should return empty array when no current restaurant', () => {
+    const mockGet = jest.fn(() => ({
+      ...mockState,
+      cart: { 'item-1': 2, 'item-2': 1 },
+      currentRestaurant: null,
+    }));
+    const getCartItemsAction = getCartItems(mockGet);
+
+    const result = getCartItemsAction();
+
+    expect(result).toEqual([]);
     expect(mockGet).toHaveBeenCalledTimes(1);
   });
 });

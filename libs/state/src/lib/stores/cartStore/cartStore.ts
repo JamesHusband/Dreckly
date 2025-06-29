@@ -39,9 +39,3 @@ const createCartStore = () =>
   );
 
 export const useCartStore = createCartStore();
-
-export const clearCartStorage = () => {
-  if (typeof window !== 'undefined') {
-    localStorage.removeItem('cart-storage');
-  }
-};

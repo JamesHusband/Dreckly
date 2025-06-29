@@ -1,0 +1,32 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@dreckly/cart": ["libs/features/cart/src/index.ts"],
+      "@dreckly/data-access": ["libs/data-access/src/index.ts"],
+      "@dreckly/home": ["libs/features/home/src/index.ts"],
+      "@dreckly/layout": ["libs/shared/layout/src/index.ts"],
+      "@dreckly/menu": ["libs/features/menu/src/index.ts"],
+      "@dreckly/orders": ["libs/features/orders/src/index.ts"],
+      "@dreckly/restaurants": ["libs/features/restaurants/src/index.ts"],
+      "@dreckly/state": ["libs/state/src/index.ts"],
+      "@dreckly/types": ["libs/shared/types/src/index.ts"],
+      "@dreckly/ui-kit": ["libs/shared/ui-kit/src/index.ts"],
+      "@dreckly/utils": ["libs/shared/utils/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

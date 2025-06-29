@@ -46,3 +46,9 @@ Thumbs.db
 # Next.js
 .next
 out
+static/environment.js
+static/favicon.ico
+static/main.js
+static/runtime.js
+static/styles.css
+static/styles.js

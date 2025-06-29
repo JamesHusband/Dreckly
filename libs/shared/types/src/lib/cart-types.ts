@@ -10,14 +10,6 @@ export type CartState = {
   currentRestaurant: Restaurant | null;
 };
 
-// Cart item with quantity (used consistently across the app)
-export interface CartItem extends MenuItem {
-  quantity: number;
-}
-
-// =====================
-// Cart Actions
-// =====================
 export interface CartActions {
   // Core cart operations
   addToCart: (itemId: string, restaurant?: Restaurant) => void;
@@ -38,10 +30,20 @@ export interface CartActions {
   setCurrentRestaurant: (restaurant: Restaurant) => void;
 }
 
+// Cart item with quantity (used consistently across the app)
+export interface CartItem extends MenuItem {
+  quantity: number;
+}
+
+export type CartStore = CartState & CartActions;
+
+// =====================
+// Cart Actions
+// =====================
+
 // =====================
 // Cart Store & Hook Return
 // =====================
-export type CartStore = CartState & CartActions;
 
 export interface UseCartReturn extends CartState {
   // Cart operations
@@ -66,11 +68,6 @@ export interface UseCartReturn extends CartState {
 // =====================
 // Cart Calculations
 // =====================
-export interface CartCalculationParams {
-  cart: Cart;
-  restaurant: Restaurant;
-  serviceFee?: number;
-}
 
 export interface CartCalculationResult {
   cartItems: CartItem[];
@@ -108,14 +105,6 @@ export interface CartSidebarProps {
   cart: Cart;
   onAddToCart: (itemId: string) => void;
   onRemoveFromCart: (itemId: string) => void;
-}
-
-export interface CartSummaryProps {
-  subtotal: number;
-  deliveryFee: number;
-  serviceFee: number;
-  total: number;
-  currentRestaurant: Restaurant;
 }
 
 export interface CartCountProps {
