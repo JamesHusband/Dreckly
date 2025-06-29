@@ -18,7 +18,7 @@
       "@dreckly/cart": ["libs/features/cart/src/index.ts"],
       "@dreckly/data-access": ["libs/data-access/src/index.ts"],
       "@dreckly/home": ["libs/features/home/src/index.ts"],
-      "@dreckly/layout": ["libs/features/layout/src/index.ts"],
+      "@dreckly/layout": ["libs/shared/layout/src/index.ts"],
       "@dreckly/menu": ["libs/features/menu/src/index.ts"],
       "@dreckly/orders": ["libs/features/orders/src/index.ts"],
       "@dreckly/restaurants": ["libs/features/restaurants/src/index.ts"],
