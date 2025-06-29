@@ -192,13 +192,3 @@ export const getOrders = async (): Promise<Order[]> => {
     },
   ];
 };
-
-export const getUserOrders = async (userId: number): Promise<Order[]> => {
-  const orders = await getOrders();
-  return orders
-    .filter((order) => order.userId === userId)
-    .sort(
-      (a, b) =>
-        new Date(b.orderDate).getTime() - new Date(a.orderDate).getTime()
-    );
-};

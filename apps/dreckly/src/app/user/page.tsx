@@ -2,6 +2,7 @@
 
 import { User, Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { getUserOrders } from '@dreckly/orders';
 
 interface Address {
   line1: string;
@@ -28,10 +29,9 @@ const UserPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [orders, setOrders] = useState<any[]>([]);
-  const [ordersLoading, setOrdersLoading] = useState(false);
 
   useEffect(() => {
-    const fetchUser = async () => {
+    const fetchUserAndOrders = async () => {
       try {
         // For now, we'll fetch the first user (ID: 1) - in a real app this would be the logged-in user
         const response = await fetch('/api/users/1');
@@ -40,6 +40,12 @@ const UserPage = () => {
         }
         const userData = await response.json();
         setUser(userData);
+
+        // Fetch orders immediately after user is loaded
+        if (userData.id) {
+          const ordersData = await getUserOrders(userData.id);
+          setOrders(ordersData);
+        }
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
       } finally {
@@ -47,29 +53,8 @@ const UserPage = () => {
       }
     };
 
-    fetchUser();
+    fetchUserAndOrders();
   }, []);
-
-  useEffect(() => {
-    const fetchOrders = async () => {
-      if (!user?.id) return;
-      setOrdersLoading(true);
-      try {
-        const response = await fetch(`/api/orders?userId=${user.id}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch orders');
-        }
-        const ordersData = await response.json();
-        setOrders(ordersData);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred');
-      } finally {
-        setOrdersLoading(false);
-      }
-    };
-
-    fetchOrders();
-  }, [user?.id]);
 
   if (loading) {
     return (
@@ -214,11 +199,7 @@ const UserPage = () => {
                 Recent Orders
               </h2>
               <div className="space-y-4">
-                {ordersLoading ? (
-                  <div className="text-center py-8 text-gray-500">
-                    Loading orders...
-                  </div>
-                ) : orders && orders.length > 0 ? (
+                {orders && orders.length > 0 ? (
                   orders.map((order) => (
                     <div
                       key={order.id}
